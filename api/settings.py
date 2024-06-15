@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-=cldztbc4jg&xl0!x673!*v2_=p$$eu)=7*f#d0#zs$44xx-h^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
+ALLOWED_HOSTS = ['*']
 
 # DISCORD: Bot Token
 BOT_TOKEN = 'MTIyMDA5MTQ3NDY3MTMwODkyMA.GOOFNZ.VMeR718L6FKYLlUOIqwrQ6YVY86Sgp0dK5KdZQ'
@@ -31,7 +31,6 @@ DISCORD_IMAGE_BASE = 'https://cdn.discordapp.com'
 
 # DISCORD: Global IDs
 SERVER_ID = '1217879394941534330'
-
 
 SERVER_FETCHING = get(url=f'{DISCORD_API_BASE}/guilds/{SERVER_ID}', headers=DISCORD_AUTH)
 SERVER_DATA = SERVER_FETCHING.json() if SERVER_FETCHING.status_code == 200 else None
@@ -128,7 +127,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATICFILES_DIRS = path.join(BASE_DIR, 'static'),
+STATIC_ROOT = path.join(BASE_DIR, 'staticfiles_build', 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
