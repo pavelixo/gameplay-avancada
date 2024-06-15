@@ -13,3 +13,6 @@ class DiscordConfig:
   GUILDS_ENDPOINT: Endpoint = f'{DISCORD_API_BASE}/guilds'
   USER_AVATARS_ENDPOINT: Endpoint = f'{DISCORD_IMAGE_BASE}/avatars'
   GUILD_MEMBERS: Endpoint = f'{GUILDS_ENDPOINT}/{GUILD_ID}/members'
+
+  # Stat
+  GUILD_MEMBERS_COUNT: int = int(settings.GUILD_MEMBERS_COUNT) if settings.GUILD_MEMBERS_COUNT else None

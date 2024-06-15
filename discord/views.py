@@ -3,15 +3,12 @@ from django.views import View
 from django.conf import settings
 
 from .config import DiscordConfig
-from .services import DiscordUserService
-
+from .services import DiscordUserService, AvatarProcecssor, MemberService
+from .abstract import IUserService, IAvatarProcessor
 
 class DiscordView(View):
   config = DiscordConfig
   headers = settings.DISCORD_AUTH
-
-  def __init__(self, **kwargs: Any) -> None:
-    kwargs = {'config': self.config, 'headers': self.headers}
-
-    self.user_service = DiscordUserService(**kwargs)
-    super().__init__(**kwargs)
+  user_service: IUserService = DiscordUserService(config, headers)
+  avatar_processor: IAvatarProcessor = AvatarProcecssor(config)
+  member_service: MemberService = MemberService(user_service, avatar_processor)

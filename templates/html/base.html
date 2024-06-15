@@ -21,9 +21,14 @@
 
     <script src="{% static 'vendor/htmx/htmx.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/globals.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/container.css' %}">
     {% block head %}{% endblock %}
   </head>
   <body>
-    {% block body %}{% endblock %}
+    {% include 'html/header/header.html' %}
+    <div class="container">
+      {% block body %}{% endblock %}
+    </div>
   </body>
 </html>

@@ -1,0 +1,18 @@
+{% extends 'html/base.html' %}
+{% load static %}
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block body %}
+  <div class="user-container">
+    {% for user in users %}
+    <div class="user-card ">
+        <div class="user-avatar">
+          <img src="{{ user.avatar }}" alt="{{ user.username }}">
+        </div>
+        <h3 class="user-username">@{{ user.username }}</h3>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock %}

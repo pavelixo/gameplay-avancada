@@ -4,6 +4,4 @@ from discord.views import DiscordView
 
 class Home(DiscordView):
   def get(self, request):
-    users = [user['username'] for user in self.user_service.get_users()]
-    usernames = ', '.join(users)
-    return render(request, 'index.html')
+    return render(request, 'home.html', context={'users': self.member_service.get_members()})

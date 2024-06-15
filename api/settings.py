@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-=cldztbc4jg&xl0!x673!*v2_=p$$eu)=7*f#d0#zs$44xx-h^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -31,13 +31,15 @@ DISCORD_IMAGE_BASE = 'https://cdn.discordapp.com'
 # DISCORD: Global IDs
 GUILD_ID = '1217879394941534330'
 
-# Server data: Fetch
-GUILD_FETCHING = get(url=f'{DISCORD_API_BASE}/guilds/{GUILD_ID}', headers=DISCORD_AUTH)
+# Guild data: Fetch, Data
+GUILD_FETCHING = get(url=f'{DISCORD_API_BASE}/guilds/{GUILD_ID}', params={'with_counts': True}, headers=DISCORD_AUTH)
 GUILD_DATA = GUILD_FETCHING.json() if GUILD_FETCHING.status_code == 200 else None
 
 OWNER_FETCHING = get(url=f'{DISCORD_API_BASE}/users/{GUILD_DATA["owner_id"]}', headers=DISCORD_AUTH)
 OWNER_DATA = OWNER_FETCHING.json() if OWNER_FETCHING.status_code == 200 else None
 
+# GUILD:
+GUILD_MEMBERS_COUNT = GUILD_DATA['approximate_member_count']
 OWNER_USERNAME = OWNER_DATA['username']
 OWNER_GLOBAL_NAME = OWNER_DATA['global_name']
 
@@ -45,11 +47,10 @@ OWNER_GLOBAL_NAME = OWNER_DATA['global_name']
 SITE_NAME = GUILD_DATA['name']
 FAVICON = f"{DISCORD_IMAGE_BASE}/icons/{GUILD_ID}/{GUILD_DATA['icon']}.png"
 
-
 # META:
 META_SITE_NAME = "Gameplay Avançada"
 DESCRIPTION = f'''
-{SITE_NAME} está atualmente na posse de {OWNER_USERNAME} (também conhecido como {OWNER_GLOBAL_NAME}).
+{SITE_NAME} está atualmente na posse de @{OWNER_USERNAME} (também conhecido como {OWNER_GLOBAL_NAME}).
 Os mitinhos estão mais ativos do que nunca!!!!!
 '''
 
@@ -146,7 +147,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = path.join(BASE_DIR, 'static'),
 STATIC_ROOT = path.join(BASE_DIR, 'staticfiles_build', 'static')
-
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
