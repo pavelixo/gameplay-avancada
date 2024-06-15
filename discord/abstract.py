@@ -4,7 +4,7 @@ from .types import User
 
 class IUserService(ABC):
   @abstractmethod
-  def get_users(self) -> Union[ List[User], None ]:
+  def get_users(self) -> Union[List[User], None]:
     pass
 
 class IAvatarProcessor(ABC):
