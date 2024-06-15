@@ -1,20 +1,29 @@
 .user-container {
-  position: relative;
-  width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  justify-content: center;
+  max-width: 90%;
+  margin: 0 auto;
+  margin-top: 15px;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
+  overflow-x: hidden;
 }
 
 .user-card {
-  width: 200px;
-  height: 200px;
+  width: 100%; /* Ocupa todo o espaço disponível na grade */
+  max-width: 80px; /* Define a largura máxima para cada card */
+  height: 100px; /* Reduz a altura dos cards */
   overflow: hidden;
   position: relative;
+  border-radius: 8px; /* Adiciona um pouco de borda arredondada aos cards */
 }
 
 .user-avatar {
-  width: 100px;
-  height: 100px;
+  width: 50px; /* Reduz o tamanho do avatar */
+  height: 50px; /* Reduz o tamanho do avatar */
   border-radius: 50%;
   overflow: hidden;
   position: absolute;
@@ -22,7 +31,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
-  
+
 .user-avatar img {
   width: 100%;
   height: auto;
@@ -30,11 +39,12 @@
 
 .user-username {
   position: absolute;
-  bottom: 10px;
+  bottom: 5px; /* Ajusta o espaçamento inferior do nome de usuário */
   left: 0;
   right: 0;
   text-align: center;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  font-size: 12px;
 }
