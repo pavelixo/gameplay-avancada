@@ -1,7 +1,9 @@
-from django.shortcuts import render
-from django.views import View
+from django.http import HttpResponse
+from discord.views import DiscordView
 
-class Index(View):
 
+class Index(DiscordView):
   def get(self, request):
-    return render(request, 'index.html')
+    users = [user['username'] for user in self.user_service.get_users()]
+    usernames = ', '.join(users)
+    return HttpResponse(f'{usernames}')

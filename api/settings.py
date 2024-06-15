@@ -10,6 +10,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-=cldztbc4jg&xl0!x673!*v2_=p$$eu)=7*f#d0#zs$44xx-h^'
 
+# DISCORD: http header
+DISCORD_AUTH = {
+  'Authorization': f'Bot MTIyMDA5MTQ3NDY3MTMwODkyMA.GOOFNZ.VMeR718L6FKYLlUOIqwrQ6YVY86Sgp0dK5KdZQ'
+}
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -26,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'discord',
     'handler',
 ]
 
