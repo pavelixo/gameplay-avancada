@@ -4,17 +4,25 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- meta -->
     <title>{% block title %}{{ settings.SITE_NAME }}{% endblock %}</title>
-    {% block head %}{% endblock %}
     <link rel="icon" type="image/png" href="{{ settings.FAVICON }}">
+
+    <!-- meta -->
+    <meta name="og:title" content="{{ settings.SITE_NAME}}">
+    <meta name="og:site_name" content="{{ settings.META_SITE_NAME}}">
     <meta
       property="og:description"
       content="{% block description %}{{ settings.DESCRIPTION }}{% endblock %}"
     />
+    <meta name="og:type" content="website">
+    <meta charset="utf-8" data-rh="true">
+    <meta name="theme-color" content="#0e1111">
+    <meta property="og:image" content="{% static 'assets/banner.gif' %}" data-rh="true">
     <!-- meta -->
+
     <script src="{% static 'vendor/htmx/htmx.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/globals.css' %}">
+    {% block head %}{% endblock %}
   </head>
   <body>
     {% block body %}{% endblock %}
