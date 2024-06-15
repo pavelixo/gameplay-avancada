@@ -35,7 +35,7 @@ GUILD_FETCHING = get(url=f'{DISCORD_API_BASE}/guilds/{GUILD_ID}', headers=DISCOR
 GUILD_DATA = GUILD_FETCHING.json() if GUILD_FETCHING.status_code == 200 else None
 
 GUILD_NAME = GUILD_DATA['name']
-GUILD_ICON = f'https://cdn.discordapp.com/icons/{GUILD_ID}/{GUILD_DATA['icon']}.png'
+GUILD_ICON = f"https://cdn.discordapp.com/icons/{GUILD_ID}/{GUILD_DATA['icon']}.png"
 # Application definition
 
 INSTALLED_APPS = [
