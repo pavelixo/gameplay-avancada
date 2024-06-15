@@ -1,3 +1,4 @@
+from requests import get
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -10,16 +11,31 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-=cldztbc4jg&xl0!x673!*v2_=p$$eu)=7*f#d0#zs$44xx-h^'
 
-# DISCORD: http header
-DISCORD_AUTH = {
-  'Authorization': f'Bot MTIyMDA5MTQ3NDY3MTMwODkyMA.GOOFNZ.VMeR718L6FKYLlUOIqwrQ6YVY86Sgp0dK5KdZQ'
-}
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
 
+# DISCORD: Bot Token
+BOT_TOKEN = 'MTIyMDA5MTQ3NDY3MTMwODkyMA.GOOFNZ.VMeR718L6FKYLlUOIqwrQ6YVY86Sgp0dK5KdZQ'
+
+# DISCORD: http header
+DISCORD_AUTH = {
+  'Authorization': f'Bot {BOT_TOKEN}'
+}
+
+# DISCORD: Global Endpoints
+DISCORD_API_BASE = 'https://discord.com/api/v10'
+DISCORD_IMAGE_BASE = 'https://cdn.discordapp.com'
+
+# DISCORD: Global IDs
+SERVER_ID = '1217879394941534330'
+
+
+SERVER_FETCHING = get(url=f'{DISCORD_API_BASE}/guilds/{SERVER_ID}', headers=DISCORD_AUTH)
+SERVER_DATA = SERVER_FETCHING.json() if SERVER_FETCHING.status_code == 200 else None
+
+SERVER_NAME = SERVER_DATA['name']
 
 # Application definition
 
@@ -58,6 +74,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # externals
+                'django_settings_export.settings_export'
             ],
         },
     },
@@ -114,3 +133,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Context processors: django-settings-export
+SETTINGS_EXPORT = [
+    'SERVER_NAME'
+]
