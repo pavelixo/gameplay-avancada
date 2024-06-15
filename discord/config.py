@@ -7,7 +7,7 @@ class DiscordConfig:
   DISCORD_IMAGE_BASE: Endpoint = 'https://cdn.discordapp.com'
 
   # ID's
-  GUILD_ID: ID = settings.SERVER_ID
+  GUILD_ID: ID = settings.GUILD_ID
 
   # Endpoints
   GUILDS_ENDPOINT: Endpoint = f'{DISCORD_API_BASE}/guilds'

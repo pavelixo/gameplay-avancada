@@ -29,12 +29,12 @@ DISCORD_API_BASE = 'https://discord.com/api/v10'
 DISCORD_IMAGE_BASE = 'https://cdn.discordapp.com'
 
 # DISCORD: Global IDs
-SERVER_ID = '1217879394941534330'
+GUILD_ID = '1217879394941534330'
 
-SERVER_FETCHING = get(url=f'{DISCORD_API_BASE}/guilds/{SERVER_ID}', headers=DISCORD_AUTH)
-SERVER_DATA = SERVER_FETCHING.json() if SERVER_FETCHING.status_code == 200 else None
+GUILD_FETCHING = get(url=f'{DISCORD_API_BASE}/guilds/{GUILD_ID}', headers=DISCORD_AUTH)
+GUILD_DATA = GUILD_FETCHING.json() if GUILD_FETCHING.status_code == 200 else None
 
-SERVER_NAME = SERVER_DATA['name']
+GUILD_NAME = GUILD_DATA['name']
 
 # Application definition
 
@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    
+    # Internals
     'discord',
     'handler',
 ]
@@ -130,7 +131,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = path.join(BASE_DIR, 'static'),
 STATIC_ROOT = path.join(BASE_DIR, 'staticfiles_build', 'static')
 
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
@@ -138,5 +138,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Context processors: django-settings-export
 SETTINGS_EXPORT = [
-    'SERVER_NAME'
+    'GUILD_NAME'
 ]
