@@ -34,10 +34,20 @@ GUILD_ID = '1217879394941534330'
 GUILD_FETCHING = get(url=f'{DISCORD_API_BASE}/guilds/{GUILD_ID}', headers=DISCORD_AUTH)
 GUILD_DATA = GUILD_FETCHING.json() if GUILD_FETCHING.status_code == 200 else None
 
-GUILD_NAME = GUILD_DATA['name']
-GUILD_ICON = f"https://cdn.discordapp.com/icons/{GUILD_ID}/{GUILD_DATA['icon']}.png"
-# Application definition
+OWNER_FETCHING = get(url=f'{DISCORD_API_BASE}/users/{GUILD_DATA["owner_id"]}', headers=DISCORD_AUTH)
+OWNER_DATA = OWNER_FETCHING.json() if OWNER_FETCHING.status_code == 200 else None
 
+OWNER_USERNAME = OWNER_DATA['username']
+OWNER_GLOBAL_NAME = OWNER_DATA['global_name']
+
+SITE_NAME = GUILD_DATA['name']
+FAVICON = f"{DISCORD_IMAGE_BASE}/icons/{GUILD_ID}/{GUILD_DATA['icon']}.png"
+DESCRIPTION = f'''
+{SITE_NAME} está atualmente na posse de {OWNER_USERNAME} (também conhecido como {OWNER_GLOBAL_NAME}).
+Os mitinhos estão mais ativos do que nunca!!!!!
+'''
+
+# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -138,6 +148,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Context processors: django-settings-export
 SETTINGS_EXPORT = [
-    'GUILD_NAME',
-    'GUILD_ICON'
+    'SITE_NAME',
+    'FAVICON',
+    'DESCRIPTION'
 ]

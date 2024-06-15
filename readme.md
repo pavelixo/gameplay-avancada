@@ -6,6 +6,9 @@
 # Title if not passed will be replaced by the Server Name
 {% block title %}...{% endblock %}
 
+# Description if not passed will be replaced by default description
+{% block description %}...{% endblock %}
+
 # Head Content
 {% block head %}...{% endblock %}
 

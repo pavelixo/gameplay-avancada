@@ -4,11 +4,17 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- meta -->
+    <title>{% block title %}{{ settings.SITE_NAME }}{% endblock %}</title>
+    {% block head %}{% endblock %}
+    <link rel="icon" type="image/png" href="{{ settings.FAVICON }}">
+    <meta
+      property="og:description"
+      content="{% block description %}{{ settings.DESCRIPTION }}{% endblock %}"
+    />
+    <!-- meta -->
     <script src="{% static 'vendor/htmx/htmx.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/globals.css' %}">
-    <link rel="icon" type="image/png" href="{{ settings.GUILD_ICON }}">
-    <title>{% block title %}{{ settings.GUILD_NAME }}{% endblock %}</title>
-    {% block head %}{% endblock %}
   </head>
   <body>
     {% block body %}{% endblock %}
