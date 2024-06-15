@@ -1,3 +1,4 @@
+from django.conf import settings
 from .types import Endpoint, ID
 
 class DiscordConfig:
@@ -6,7 +7,7 @@ class DiscordConfig:
   DISCORD_IMAGE_BASE: Endpoint = 'https://cdn.discordapp.com'
 
   # ID's
-  GUILD_ID: ID = '1217879394941534330'
+  GUILD_ID: ID = settings.SERVER_ID
 
   # Endpoints
   GUILDS_ENDPOINT: Endpoint = f'{DISCORD_API_BASE}/guilds'
