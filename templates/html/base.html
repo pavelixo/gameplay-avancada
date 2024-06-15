@@ -8,16 +8,15 @@
     <link rel="icon" type="image/png" href="{{ settings.FAVICON }}">
 
     <!-- meta -->
+    <meta name="og:type" content="website">
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#0e1111">
     <meta name="og:title" content="{{ settings.SITE_NAME}}">
     <meta name="og:site_name" content="{{ settings.META_SITE_NAME}}">
     <meta
       property="og:description"
       content="{% block description %}{{ settings.DESCRIPTION }}{% endblock %}"
     />
-    <meta name="og:type" content="website">
-    <meta charset="utf-8">
-    <meta name="theme-color" content="#0e1111">
-    <meta property="og:image" content="{% static 'assets/banner.png' %}">
     <!-- meta -->
 
     <script src="{% static 'vendor/htmx/htmx.min.js' %}"></script>
