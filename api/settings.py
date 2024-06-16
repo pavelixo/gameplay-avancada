@@ -1,5 +1,4 @@
-from os import path
-from requests import get
+from os import path, getenv
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,7 +26,7 @@ DISCORD_AUTH = {
 # DISCORD: Global Endpoints
 DISCORD_API_BASE = 'https://discord.com/api/v10'
 DISCORD_IMAGE_BASE = 'https://cdn.discordapp.com'
-
+print(getenv('KV'))
 # DISCORD: Global IDs
 GUILD_ID = '1217879394941534330'
 
