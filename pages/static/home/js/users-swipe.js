@@ -9,10 +9,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   console.log("Initializing Swiper");
   var swiper = new Swiper('.swiper-container', {
-    slidesPerView: 4,
+    slidesPerView: 5,
     spaceBetween: 100,
     loop: true,
-    loopAdditionalSlides: 4,
+    loopAdditionalSlides: 5,
     breakpoints: {
       640: {
         slidesPerView: 2,
@@ -31,14 +31,11 @@ document.addEventListener('DOMContentLoaded', function () {
       el: '.swiper-pagination',
       clickable: true,
     },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
+    autoplay: {
+      delay: 1000,
     },
-    autoplay: {    // Autoplay configuration
-      delay: 1000, // Delay between transitions in milliseconds
-      disableOnInteraction: false, // Continue autoplay after user interactions
-    },
+    speed: 800,
+    effect: 'slide',
   });
 
   console.log("Swiper initialized", swiper);
