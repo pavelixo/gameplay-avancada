@@ -1,4 +1,3 @@
-
 from django.views import View
 from django.views.generic.base import ContextMixin
 from django.shortcuts import render
@@ -19,10 +18,10 @@ class DiscordView(View, ContextMixin):
 
   discord_context = {
     'meta': {
-      'site_name': 'Gameplay Avançada',
       'guild_name': config.GUILD_NAME,
+      'site_name': settings.SITE_NAME,
+      'description': settings.DESCRIPTION,
       'favicon': config.GUILD_FAVICON,
-      'description': f'estamos na ditadura de @{config.OWNER_USERNAME} A.K.A {config.OWNER_GLOBAL_NAME}'
     },
   }
 

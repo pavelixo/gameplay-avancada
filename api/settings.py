@@ -1,22 +1,26 @@
+from dotenv import load_dotenv
 from os import path, getenv
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# load development in .env
+load_dotenv(BASE_DIR / '.env')
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=cldztbc4jg&xl0!x673!*v2_=p$$eu)=7*f#d0#zs$44xx-h^'
+SECRET_KEY = getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = bool(int(getenv('DEBUG')))
 
 ALLOWED_HOSTS = ['*']
 
 # DISCORD: Bot Token
-BOT_TOKEN = 'MTIyMDA5MTQ3NDY3MTMwODkyMA.GOOFNZ.VMeR718L6FKYLlUOIqwrQ6YVY86Sgp0dK5KdZQ'
+BOT_TOKEN = getenv('BOT_TOKEN')
 
 # DISCORD: http header
 DISCORD_AUTH = {
@@ -29,6 +33,10 @@ DISCORD_IMAGE_BASE = 'https://cdn.discordapp.com'
 
 # DISCORD: Global IDs
 GUILD_ID = '1217879394941534330'
+
+# META:
+SITE_NAME = 'Gameplay Avançada'
+DESCRIPTION = 'A melhor comunidade do discord! xxd:'
 
 # Application definition
 INSTALLED_APPS = [

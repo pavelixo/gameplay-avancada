@@ -22,7 +22,11 @@
 ```python
 # settings.py
 BOT_TOKEN = BOT TOKEN
-SERVER_ID = SERVER ID 
+GUILD_ID = YOUR GUILD ID
+
+# Website meta tags constants
+SITE_NAME = ...
+DESCRIPTION = ...
 ```
 
 - setting Up a Django Project
