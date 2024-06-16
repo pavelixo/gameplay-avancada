@@ -9,8 +9,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   console.log("Initializing Swiper");
   var swiper = new Swiper('.swiper-container', {
-    slidesPerView: 1,
-    spaceBetween: 10,
+    slidesPerView: 4,
+    spaceBetween: 100,
+    loop: true,
+    loopAdditionalSlides: 4,
     breakpoints: {
       640: {
         slidesPerView: 2,
@@ -32,6 +34,10 @@ document.addEventListener('DOMContentLoaded', function () {
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
+    },
+    autoplay: {    // Autoplay configuration
+      delay: 1000, // Delay between transitions in milliseconds
+      disableOnInteraction: false, // Continue autoplay after user interactions
     },
   });
 

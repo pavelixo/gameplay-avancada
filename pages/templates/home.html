@@ -3,6 +3,7 @@
 {% load static %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'vendor/swiper/css/swiper-bundle.min.css' %}" />
+<link rel="stylesheet" href="{% static 'home/css/text.css' %}" />
 {% endblock %}
 
 {% block body %}
@@ -16,7 +17,7 @@
             <div class="w-20 h-20 mb-4 rounded-full overflow-hidden">
               <img class="w-full h-full object-cover" src="{{ user.avatar }}" alt="{{ user.username }}">
             </div>
-            <h3 class="text-lg font-semibold">@{{ user.username }}</h3>
+            <h3 class="username text-center">@{{ user.username }}</h3>
           </div>
         {% endif %}
       {% endfor %}
