@@ -29,4 +29,5 @@ class DiscordConfig:
 
   GUILD_NAME = GUILD_DATA['name']
   GUILD_FAVICON = f"{DISCORD_IMAGE_BASE}/icons/{GUILD_ID}/{GUILD_DATA['icon']}.png"
-  GUILD_MEMBERS_COUNT: int = parser(GUILD_MEMBERS_COUNT, int)
+
+  guild_members_count: int = parser(GUILD_MEMBERS_COUNT, int)

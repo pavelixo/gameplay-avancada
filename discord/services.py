@@ -13,7 +13,7 @@ class DiscordUserService(IUserService):
   def get_users(self) -> Union[List[User], None]:
     response: Response = get(
       url=self.config.GUILD_MEMBERS, 
-      params={'limit': self.config.GUILD_MEMBERS_COUNT}, 
+      params={'limit': self.config.guild_members_count}, 
       headers=self.headers
     )
 
