@@ -9,10 +9,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   console.log("Initializing Swiper");
   var swiper = new Swiper('.swiper-container', {
-    slidesPerView: 5,
+    slidesPerView: 4,
     spaceBetween: 100,
     loop: true,
-    loopAdditionalSlides: 5,
+    loopAdditionalSlides: 4,
     breakpoints: {
       640: {
         slidesPerView: 2,
