@@ -1,6 +1,6 @@
 from requests import get, Response
 from typing import Dict, List, Union
-from .abstract import IUserService, IAvatarProcessor
+from .interface import IUserService, IAvatarProcessor
 from .config import DiscordConfig
 from .types import User
 

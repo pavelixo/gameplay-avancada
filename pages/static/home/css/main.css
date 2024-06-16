@@ -2,7 +2,7 @@
 
 .main-container {
   margin-top: 80px;
-  text-align: center;
+  min-height: 100vh;
 }
 
 .bottom-container {
@@ -10,10 +10,13 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  position: fixed;
+  position: relative;
   width: 100%;
-  height: 90%;
-  bottom: 0;
+  height: 30%;
+  min-height: fit-content;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .user-container {
@@ -26,14 +29,15 @@
   margin-top: 15px;
   padding: 10px;
   box-sizing: border-box;
-  text-align: center;
-  overflow: hidden;
   overflow-x: hidden;
-  overflow-y: scroll;
-  border-top-right-radius: 15px;
-  border-top-left-radius: 15px;
-  clip-path: inset(0 round 15px 15px 0 0);
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  overflow-y: auto;
+  border-radius: 5px;
+  clip-path: inset(0 round 5px 5px 0 0);
+  transition: transform 0.5s ease;
+}
+
+.user-container:hover {
+  transform: translateY(-5px);
 }
 
 .user-container::-webkit-scrollbar {
@@ -47,6 +51,15 @@
 .user-container::-webkit-scrollbar-thumb {
   background: var(--background-color);
   border-radius: 15px;
+  transition: opacity 0.3s, background-color 0.3s;
+  opacity: 1;
+  height: 100px; 
+}
+
+.user-container.hide-scrollbar::-webkit-scrollbar-thumb {
+  opacity: 0;
+  background-color: transparent;
+  height: 10px;
 }
 
 .user-container::-webkit-scrollbar-thumb:hover {
@@ -54,17 +67,24 @@
 }
 
 .user-card {
-  width: 100%; /* Ocupa todo o espaço disponível na grade */
-  max-width: 80px; /* Define a largura máxima para cada card */
-  height: 100px; /* Reduz a altura dos cards */
+  width: 100%;
+  max-width: 80px;
+  height: 100px;
   overflow: hidden;
   position: relative;
-  border-radius: 8px; /* Adiciona um pouco de borda arredondada aos cards */
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.user-card:hover {
+  transform: translateY(-5px);
 }
 
 .user-avatar {
-  width: 50px; /* Reduz o tamanho do avatar */
-  height: 50px; /* Reduz o tamanho do avatar */
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   overflow: hidden;
   position: absolute;
@@ -77,12 +97,11 @@
   width: 100%;
   height: auto;
   object-fit: cover;
-
 }
 
 .user-username {
   position: absolute;
-  bottom: 5px; /* Ajusta o espaçamento inferior do nome de usuário */
+  bottom: 5px;
   left: 0;
   right: 0;
   text-align: center;

@@ -28,6 +28,7 @@
 
 :root {
   --foreground-color: #020301;
+  --foreground-color-2: #27272798;
   --background-color: #f3f5f9;
 }
 
@@ -40,6 +41,23 @@ body, html {
   background-color: var(--foreground-color);
   overflow-x: hidden;
   height: 100vh;
+}
+
+body::-webkit-scrollbar {
+  width: 2px;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--background-color);
+  border-radius: 15px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 h1, h2, h3 {

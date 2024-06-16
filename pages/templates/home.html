@@ -1,25 +1,26 @@
 {% extends 'html/base.html' %}
 {% load static %}
 {% block head %}
-  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+  <link rel="stylesheet" href="{% static 'home/css/main.css' %}">
 {% endblock %}
 
 {% block body %}
   <div class="main-container">
-    <div class="bottom-container">
-      <h2>Membros</h2>
-      <div class="user-container scroll-wrapper">
-        {% for user in users %}
-          {% if not user.bot %}
-            <div class="user-card ">
-                <div class="user-avatar">
-                  <img src="{{ user.avatar }}" alt="{{ user.username }}">
-                </div>
-                <h3 class="user-username">@{{ user.username }}</h3>
-            </div>
-          {% endif %}
-        {% endfor %}
-      </div>
+  </div>
+  <div class="bottom-container">
+    <h1>membros</h1>
+    <div class="user-container" id="userContainer">
+      {% for user in users %}
+        {% if not user.bot %}
+          <div class="user-card ">
+              <div class="user-avatar">
+                <img src="{{ user.avatar }}" alt="{{ user.username }}">
+              </div>
+              <h3 class="user-username">@{{ user.username }}</h3>
+          </div>
+        {% endif %}
+      {% endfor %}
     </div>
   </div>
+  <script src="{% static 'home/js/scrollScript.js' %}"></script>
 {% endblock %}

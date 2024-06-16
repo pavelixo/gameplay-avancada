@@ -43,16 +43,13 @@ GUILD_MEMBERS_COUNT = GUILD_DATA['approximate_member_count']
 OWNER_USERNAME = OWNER_DATA['username']
 OWNER_GLOBAL_NAME = OWNER_DATA['global_name']
 
-# SITE:
-SITE_NAME = GUILD_DATA['name']
-FAVICON = f"{DISCORD_IMAGE_BASE}/icons/{GUILD_ID}/{GUILD_DATA['icon']}.png"
-
-# META:
-META_SITE_NAME = "Gameplay Avançada"
-DESCRIPTION = f'''
-{META_SITE_NAME} está atualmente na posse de @{OWNER_USERNAME} (também conhecido como {OWNER_GLOBAL_NAME}).
-Os mitinhos estão mais ativos do que nunca!!!!!
-'''
+# SITE: Meta
+META = {
+  "site_name": "Gameplay Avançada",
+  "guild_name": GUILD_DATA['name'],
+  "favicon": f"{DISCORD_IMAGE_BASE}/icons/{GUILD_ID}/{GUILD_DATA['icon']}.png",
+  "description": f'estamos na ditadura de @{OWNER_USERNAME} A.K.A {OWNER_GLOBAL_NAME}'
+}
 
 # Application definition
 INSTALLED_APPS = [
@@ -157,8 +154,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Context processors: django-settings-export
 SETTINGS_EXPORT = [
-    'SITE_NAME',
-    'FAVICON',
-    'DESCRIPTION',
-    'META_SITE_NAME'
+  'META'
 ]

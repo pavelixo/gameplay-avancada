@@ -4,7 +4,7 @@ from django.conf import settings
 
 from .config import DiscordConfig
 from .services import DiscordUserService, AvatarProcecssor, MemberService
-from .abstract import IUserService, IAvatarProcessor
+from .interface import IUserService, IAvatarProcessor
 
 class DiscordView(View):
   config = DiscordConfig

@@ -11,14 +11,12 @@
 }
 
 .header h1 {
-  margin: 0; /* Removido o margin padrão do h1 */
-  font-size: 24px; /* Exemplo de tamanho de fonte, ajuste conforme necessário */
-  overflow: hidden; /* Esconde qualquer conteúdo que ultrapasse os limites */
-  text-overflow: ellipsis; /* Exibe reticências (...) quando o texto é cortado */
-  white-space: nowrap; /* Impede que o texto quebre em várias linhas */
+  margin: 0;
+  font-size: 24px;
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-
-/* Exemplo de media query para ajustar o tamanho da fonte em dispositivos menores */
 @media screen and (max-width: 600px) {
   .header h1 {
     font-size: 15px;
