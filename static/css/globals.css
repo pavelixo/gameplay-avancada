@@ -27,7 +27,7 @@
 }
 
 :root {
-  --foreground-color: #020301
+  --foreground-color: #020301;
   --background-color: #f3f5f9;
 }
 
@@ -39,6 +39,7 @@
 body, html {
   background-color: var(--foreground-color);
   overflow-x: hidden;
+  height: 100vh;
 }
 
 h1, h2, h3 {
