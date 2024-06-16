@@ -10,12 +10,14 @@
       <h2>Membros</h2>
       <div class="user-container scroll-wrapper">
         {% for user in users %}
-        <div class="user-card ">
-            <div class="user-avatar">
-              <img src="{{ user.avatar }}" alt="{{ user.username }}">
+          {% if not user.bot %}
+            <div class="user-card ">
+                <div class="user-avatar">
+                  <img src="{{ user.avatar }}" alt="{{ user.username }}">
+                </div>
+                <h3 class="user-username">@{{ user.username }}</h3>
             </div>
-            <h3 class="user-username">@{{ user.username }}</h3>
-        </div>
+          {% endif %}
         {% endfor %}
       </div>
     </div>

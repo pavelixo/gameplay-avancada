@@ -2,13 +2,12 @@
 
 .header {
   background-color: var(--foreground-color);
-  color: var(--background-color);
   padding: 10px 20px;
-  text-align: center;
+  text-align: left;
   width: 100%;
   top: 0;
   z-index: 1000;
-  box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+  position: fixed;
 }
 
 .header h1 {
