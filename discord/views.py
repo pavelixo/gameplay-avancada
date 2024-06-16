@@ -1,4 +1,5 @@
 from django.views import View
+from django.http import HttpResponse, HttpRequest
 from django.views.generic.base import ContextMixin
 from django.shortcuts import render
 from django.conf import settings
@@ -30,6 +31,6 @@ class DiscordView(View, ContextMixin):
     context.update(self.discord_context)
     return context
   
-  def render_template(self, request, context=None):
+  def render_template(self, request: HttpRequest, context=None) -> HttpResponse:
     context = self.get_context_data(**context)
     return render(request, self.template_name, context)

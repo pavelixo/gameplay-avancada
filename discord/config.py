@@ -17,7 +17,6 @@ class DiscordConfig:
   USER_AVATARS_ENDPOINT: Endpoint = f'{DISCORD_IMAGE_BASE}/avatars'
   GUILD_MEMBERS: Endpoint = f'{GUILDS_ENDPOINT}/{GUILD_ID}/members'
   
-
   # Data, Fetching: Guild
   GUILD_DATA: Data = fetch_data(f'{DISCORD_API_BASE}/guilds/{GUILD_ID}?with_counts=true')
   GUILD_MEMBERS_COUNT: Data = GUILD_DATA['approximate_member_count']
