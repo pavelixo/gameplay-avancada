@@ -50,7 +50,7 @@ FAVICON = f"{DISCORD_IMAGE_BASE}/icons/{GUILD_ID}/{GUILD_DATA['icon']}.png"
 # META:
 META_SITE_NAME = "Gameplay Avançada"
 DESCRIPTION = f'''
-{SITE_NAME} está atualmente na posse de @{OWNER_USERNAME} (também conhecido como {OWNER_GLOBAL_NAME}).
+{META_SITE_NAME} está atualmente na posse de @{OWNER_USERNAME} (também conhecido como {OWNER_GLOBAL_NAME}).
 Os mitinhos estão mais ativos do que nunca!!!!!
 '''
 
