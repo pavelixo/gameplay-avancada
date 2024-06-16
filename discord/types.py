@@ -30,3 +30,6 @@ class Endpoint(AbstractTypes):
 class ID(AbstractTypes):
   pass
 
+
+class Data(AbstractTypes):
+  pass

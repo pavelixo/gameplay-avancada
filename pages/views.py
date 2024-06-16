@@ -3,5 +3,10 @@ from discord.views import DiscordView
 
 
 class Home(DiscordView):
+  template_name = 'home.html'
+
   def get(self, request):
-    return render(request, 'home.html', context={'users': self.member_service.get_members()})
+    context = {
+      'users': self.member_service.get_members()
+    }
+    return self.render_template(request, context)

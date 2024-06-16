@@ -31,26 +31,6 @@ DISCORD_IMAGE_BASE = 'https://cdn.discordapp.com'
 # DISCORD: Global IDs
 GUILD_ID = '1217879394941534330'
 
-# Guild data: Fetch, Data
-GUILD_FETCHING = get(url=f'{DISCORD_API_BASE}/guilds/{GUILD_ID}', params={'with_counts': True}, headers=DISCORD_AUTH)
-GUILD_DATA = GUILD_FETCHING.json() if GUILD_FETCHING.status_code == 200 else None
-
-OWNER_FETCHING = get(url=f'{DISCORD_API_BASE}/users/{GUILD_DATA["owner_id"]}', headers=DISCORD_AUTH)
-OWNER_DATA = OWNER_FETCHING.json() if OWNER_FETCHING.status_code == 200 else None
-
-# GUILD:
-GUILD_MEMBERS_COUNT = GUILD_DATA['approximate_member_count']
-OWNER_USERNAME = OWNER_DATA['username']
-OWNER_GLOBAL_NAME = OWNER_DATA['global_name']
-
-# SITE: Meta
-META = {
-  "site_name": "Gameplay Avançada",
-  "guild_name": GUILD_DATA['name'],
-  "favicon": f"{DISCORD_IMAGE_BASE}/icons/{GUILD_ID}/{GUILD_DATA['icon']}.png",
-  "description": f'estamos na ditadura de @{OWNER_USERNAME} A.K.A {OWNER_GLOBAL_NAME}'
-}
-
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -88,9 +68,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-
-                # externals
-                'django_settings_export.settings_export'
             ],
         },
     },
@@ -151,8 +128,3 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# Context processors: django-settings-export
-SETTINGS_EXPORT = [
-  'META'
-]
