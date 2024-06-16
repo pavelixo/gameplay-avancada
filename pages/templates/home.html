@@ -1,26 +1,29 @@
 {% extends 'html/base.html' %}
+
 {% load static %}
 {% block head %}
-  <link rel="stylesheet" href="{% static 'home/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'vendor/swiper/css/swiper-bundle.min.css' %}" />
 {% endblock %}
 
 {% block body %}
-  <div class="main-container">
-  </div>
-  <div class="bottom-container">
-    <h1>membros</h1>
-    <div class="user-container" id="userContainer">
+<div class="container mx-auto mt-12 p-6">
+  <h1 class="text-3xl font-bold text-center">Membros</h1>
+  <div class="swiper-container mt-12">
+    <div class="swiper-wrapper">
       {% for user in users %}
         {% if not user.bot %}
-          <div class="user-card ">
-              <div class="user-avatar">
-                <img src="{{ user.avatar }}" alt="{{ user.username }}">
-              </div>
-              <h3 class="user-username">@{{ user.username }}</h3>
+          <div class="swiper-slide p-4 rounded-lg shadow-md flex flex-col items-center">
+            <div class="w-20 h-20 mb-4 rounded-full overflow-hidden">
+              <img class="w-full h-full object-cover" src="{{ user.avatar }}" alt="{{ user.username }}">
+            </div>
+            <h3 class="text-lg font-semibold">@{{ user.username }}</h3>
           </div>
         {% endif %}
       {% endfor %}
     </div>
   </div>
-  <script src="{% static 'home/js/scrollScript.js' %}"></script>
+</div>
+
+<script src="{% static 'vendor/swiper/js/swiper-bundle.min.js' %}"></script>
+<script src="{% static 'home/js/users-swipe.js' %}"></script>
 {% endblock %}

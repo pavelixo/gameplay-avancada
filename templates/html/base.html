@@ -18,11 +18,12 @@
       content="{% block description %}{{ settings.META.description }}{% endblock %}"
     />
     <!-- meta -->
-
+    <script src="{% static 'vendor/tailwind/tailwind.3.4.4' %}"></script>
+    <script src="{% static 'tailwind/tailwind.config.js' %}"></script>
     <script src="{% static 'vendor/htmx/htmx.min.js' %}"></script>
+
     <link rel="stylesheet" href="{% static 'css/globals.css' %}">
     <link rel="stylesheet" href="{% static 'css/header.css' %}">
-    <link rel="stylesheet" href="{% static 'css/container.css' %}">
     {% block head %}{% endblock %}
   </head>
   <body>

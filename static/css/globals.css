@@ -43,6 +43,12 @@ body, html {
   height: 100vh;
 }
 
+body::-webkit-scrollbar,
+body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--background-color) transparent; 
+}
+
 body::-webkit-scrollbar {
   width: 2px;
 }
