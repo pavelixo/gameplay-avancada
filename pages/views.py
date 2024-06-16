@@ -1,18 +1,14 @@
-from datetime import timedelta as time
 from discord.views import DiscordView
 from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_cookie
 from django.utils.decorators import method_decorator
 
 
 class Home(DiscordView):
   template_name = 'home.html'
 
-  @method_decorator(cache_page(time(hours=16)))
-  def dispatch(self, *args, **kwargs):
-      return super().dispatch(*args, **kwargs)
-
+  @method_decorator(cache_page(60 * 60))
+  @method_decorator(vary_on_cookie)
   def get(self, request):
-    context = {
-      'users': self.member_service.get_members(),
-    }
+    context = {'users': self.member_service.get_members()}
     return self.render_template(request, context)
