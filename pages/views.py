@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from os import getenv
 from discord.views import DiscordView
 
 
@@ -7,6 +7,7 @@ class Home(DiscordView):
 
   def get(self, request):
     context = {
-      'users': self.member_service.get_members()
+      'users': self.member_service.get_members(),
+      'is_working?': getenv('KV'),
     }
     return self.render_template(request, context)
