@@ -54,7 +54,7 @@
             <source src="{{ attachment.url }}" type="video/mp4">
           </video>
           {% elif attachment.url|is_image_url %}
-          <img src="{{ attachment.url }}" alt="Attachment" class="rounded-lg shadow-md w-full h-auto">
+          <img src="{{ attachment.url }}" alt="Attachment" class="rounded-lg shadow-md w-1/2 h-auto">
           {% else %}
           <a href="{{ attachment.url }}"
             class="text-blue-500 hover:underline block rounded-lg shadow-md p-4 text-center bg-gray-100">
