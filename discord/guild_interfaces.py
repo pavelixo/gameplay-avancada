@@ -23,5 +23,9 @@ class IMessageService(ABC):
 
 class IMessageProcessor(ABC):
   @abstractmethod
-  def process_messages(self, messages: List[Message]) -> List[Message]:
+  def process_replies_messages(self, messages: List[Message]) -> List[Message]:
+    pass
+  
+  @abstractmethod
+  def process_users_avatars_messages(self, messages: List[Message]) -> List[Message]:
     pass

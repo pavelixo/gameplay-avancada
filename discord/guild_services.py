@@ -63,19 +63,41 @@ class MessageService(IMessageService):
   def get_messages(self, channel_id: ID, limit: int = 10) -> List[Message]:
     endpoint = f'{self.config.CHANNELS}/{channel_id}/messages'
     params = {'limit': limit}
-    messages_data = fetch_data(endpoint=endpoint, params=params)
-    return messages_data
+    return fetch_data(endpoint=endpoint, params=params)
+
 
 class MessageProcessor(IMessageProcessor):
   def __init__(self, config: DiscordConfig):
     self.config = config
   
-  def process_messages(self, messages: List[Message]) -> List[Message]:
+  def process_replies_messages(self, messages: List[Message]) -> List[Message]:
+      processed_messages = []
+
+      for message in messages:
+        if 'referenced_message' in message and 'author' in message['referenced_message']:
+          processed_message = {
+            **message,
+            'referenced_message': {
+              **message['referenced_message'],
+              'author': {
+                **message['referenced_message']['author'],
+                'avatar': f"{self.config.DISCORD_IMAGE_BASE}/avatars/{message['referenced_message']['author']['id']}/{message['referenced_message']['author']['avatar']}"
+              }
+            }
+          }
+        else:
+          processed_message = message
+        processed_messages.append(processed_message)
+
+      return processed_messages
+
+
+
+  def process_users_avatars_messages(self, messages: List[Message]) -> List[Message]:
     return [
       {
         **message, 
-        'author': 
-        {
+        'author': {
           **message['author'], 
           'avatar': f'{self.config.DISCORD_IMAGE_BASE}/avatars/{message["author"]["id"]}/{message["author"]["avatar"]}'
         }
@@ -107,5 +129,9 @@ class GuildService:
   
   def get_announcements(self) -> List[Message]:
     announcements_channel_id: ID = settings.ANNOUNCEMENTS_CHANNEL_ID
-    messages = self.message_service.get_messages(channel_id=announcements_channel_id, limit=13)
-    return self.message_processor.process_messages(messages)
+    fetch_messages = self.message_service.get_messages(channel_id=announcements_channel_id, limit=5)
+    
+    avatar_processor = self.message_processor.process_users_avatars_messages(fetch_messages)
+    replies_processor = self.message_processor.process_replies_messages(avatar_processor)
+    
+    return replies_processor
