@@ -62,7 +62,7 @@ class MessageService(IMessageService):
   
   def get_messages(self, channel_id: ID) -> List[Message]:
     endpoint = f'{self.config.CHANNELS}/{channel_id}/messages'
-    params = {'limit': 10}
+    params = {'limit': 15}
     messages_data = fetch_data(endpoint=endpoint, params=params)
     return messages_data
 
