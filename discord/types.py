@@ -1,5 +1,5 @@
 from abc import ABC
-from typing import TypeVar, Generic, TypedDict, Optional
+from typing import TypeVar, Generic, TypedDict, Optional, List
 
 T = TypeVar('T')
 
@@ -22,6 +22,19 @@ class User(TypedDict):
   banner_color: Optional[str]
   clan: Optional[str]
 
+class TextChannel(TypedDict):
+  id: str
+  guild_id: str
+  name: str
+  type: int
+  position: int
+  permission_overwrites: List
+  rate_limit_per_user: int
+  nsfw: bool
+  topic: str
+  last_message_id: str
+  parent_id: str
+  default_auto_archive_duration: int
 
 class Endpoint(AbstractTypes):
   pass

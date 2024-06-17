@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
-from typing import Dict, List, Union
-from .types import User
+from typing import List, Union
+from .types import User, TextChannel, ID
 
 class IUserService(ABC):
   @abstractmethod
@@ -10,4 +10,9 @@ class IUserService(ABC):
 class IAvatarProcessor(ABC):
   @abstractmethod
   def process_avatar(self, users: List[User]) -> List[User]:
+    pass
+
+class IGuildService(ABC):
+  @abstractmethod
+  def get_channels(self) -> List[TextChannel]:
     pass
