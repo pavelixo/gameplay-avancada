@@ -1,8 +1,9 @@
 from typing import List
 
-from discord.types import ID, Data
+from django.conf import settings
+from discord.types import ID, Data, Message
 
-from .guild_interfaces import IChannelService, IChannelProcessor
+from .guild_interfaces import IChannelService, IChannelProcessor, IMessageService, IMessageProcessor
 from .config import DiscordConfig
 from .types import Channel
 from .utils import fetch_data
@@ -54,11 +55,57 @@ class ChannelProcessor(IChannelProcessor):
     
     return [channel for channel in channels if channel['type'] == target]
 
+
+class MessageService(IMessageService):
+  def __init__(self, config: DiscordConfig):
+    self.config = config
+  
+  def get_messages(self, channel_id: ID) -> List[Message]:
+    endpoint = f'{self.config.CHANNELS}/{channel_id}/messages'
+    params = {'limit': 5}
+    messages_data = fetch_data(endpoint=endpoint, params=params)
+    return messages_data
+
+class MessageProcessor(IMessageProcessor):
+  def __init__(self, config: DiscordConfig):
+    self.config = config
+  
+  def process_messages(self, messages: List[Message]) -> List[Message]:
+    return [
+      {
+        **message, 
+        'author': 
+        {
+          **message['author'], 
+          'avatar': f'{self.config.DISCORD_IMAGE_BASE}/avatars/{message["author"]["id"]}/{message["author"]["avatar"]}'
+        }
+      } 
+      for message in messages
+    ]
+    
+
 class GuildService:
-  def __init__(self, channels_service: IChannelService, channel_processor: IChannelProcessor):
+  def __init__(
+      self, 
+      channels_service: IChannelService, 
+      channel_processor: IChannelProcessor,
+      message_service: IMessageService,
+      message_processor: IMessageProcessor
+    ):
+
+    # Channels
     self.channel_service = channels_service
     self.channel_processor = channel_processor
+
+    # Messages
+    self.message_service = message_service
+    self.message_processor = message_processor
   
   def get_channels(self, channel_type: str = 'text') -> List[Channel]:
     channels = self.channel_service.get_channels()
     return self.channel_processor.process_channels(channels, channel_type)
+  
+  def get_announcements(self) -> List[Message]:
+    announcements_channel_id: ID = settings.ANNOUNCEMENTS_CHANNEL_ID
+    messages = self.message_service.get_messages(channel_id=announcements_channel_id)
+    return self.message_processor.process_messages(messages)

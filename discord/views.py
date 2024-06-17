@@ -8,8 +8,8 @@ from .config import DiscordConfig
 from .user_services import DiscordUserService, AvatarProcessor, MemberService
 from .user_interface import IUserService, IAvatarProcessor
 
-from .guild_interfaces import IChannelService, IChannelProcessor
-from .guild_services import GuildService, ChannelService, ChannelProcessor
+from .guild_interfaces import IChannelService, IChannelProcessor, IMessageService, IMessageProcessor
+from .guild_services import GuildService, ChannelService, ChannelProcessor, MessageService, MessageProcessor
 
 class DiscordView(View, ContextMixin):
   template_name = ''
@@ -22,9 +22,19 @@ class DiscordView(View, ContextMixin):
   member_service: MemberService = MemberService(user_service, avatar_processor)
 
   # Guild
+  # - Channels
   channel_service: IChannelService = ChannelService(config)
   channel_processor: IChannelProcessor = ChannelProcessor()
-  guild_service: GuildService = GuildService(channel_service, channel_processor)
+
+  # - Messages
+  message_service: IMessageService = MessageService(config)
+  message_processor: IMessageProcessor = MessageProcessor(config)
+  guild_service: GuildService = GuildService(
+    channel_service, 
+    channel_processor, 
+    message_service, 
+    message_processor
+  )
 
   discord_context = {
     'meta': {

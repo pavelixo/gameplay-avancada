@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import List
-from .types import Channel, ID
+from .types import Channel, Message, ID
 
 class IChannelService(ABC):
   @abstractmethod
@@ -14,4 +14,14 @@ class IChannelService(ABC):
 class IChannelProcessor(ABC):
   @abstractmethod
   def process_channels(self, channels: List[Channel], channel_type: str = 'text') -> List[Channel]:
+    pass
+
+class IMessageService(ABC):
+  @abstractmethod
+  def get_messages(self, channel_id: ID) -> List[Message]:
+    pass
+
+class IMessageProcessor(ABC):
+  @abstractmethod
+  def process_messages(self, messages: List[Message]) -> List[Message]:
     pass

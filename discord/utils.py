@@ -8,6 +8,7 @@ def fetch_data(endpoint: Endpoint, status_code=200, **kwargs) -> Union[Data, Non
   headers = settings.DISCORD_AUTH
 
   response = get(url=endpoint, headers=headers, **kwargs)
+  
   if response.status_code == status_code:
     return response.json()
   else:
