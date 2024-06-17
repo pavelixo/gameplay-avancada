@@ -52,8 +52,9 @@ class ChannelProcessor(IChannelProcessor):
     }
 
     target = matching.get(channel_type)
-    
-    return [channel for channel in channels if channel['type'] == target]
+    if channels is not None:
+      return [channel for channel in channels if channel['type'] == target]
+    return []
 
 
 class MessageService(IMessageService):
