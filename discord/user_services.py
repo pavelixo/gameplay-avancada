@@ -1,9 +1,10 @@
-from requests import get, Response
 from typing import List, Union
 
-from .interface import IUserService, IAvatarProcessor, IGuildService
+from discord.types import Data
+
+from .user_interface import IUserService, IAvatarProcessor
 from .config import DiscordConfig
-from .types import User, TextChannel
+from .types import User
 from .utils import fetch_data
 
 class DiscordUserService(IUserService):
@@ -16,13 +17,13 @@ class DiscordUserService(IUserService):
       'limit': self.config.guild_members_count
     }
 
-    users_data: Response = fetch_data(endpoint=endpoint, params=params)
+    users_data: Data = fetch_data(endpoint=endpoint, params=params)
     if not users_data:
       return None
     return [user['user'] for user in users_data]
 
 
-class AvatarProcecssor(IAvatarProcessor):
+class AvatarProcessor(IAvatarProcessor):
   def __init__(self, config: DiscordConfig):
     self.config = config
   
@@ -33,22 +34,8 @@ class AvatarProcecssor(IAvatarProcessor):
     ]
 
 
-class GuildService(IGuildService):
-  def __init__(self, config: DiscordConfig):
-    self.config = config
-  
-  def get_channels(self) -> List[TextChannel]:
-    endpoint = self.config.GUILD_CHANNELS
-    params = {'nfsw': False}
-
-    channels_data: Response = fetch_data(endpoint=endpoint, params=params)
-    if not channels_data:
-      return None
-    return channels_data
-
-
 class MemberService:
-  def __init__(self, user_service: IUserService, avatar_processor: IAvatarProcessor) -> None:
+  def __init__(self, user_service: IUserService, avatar_processor: IAvatarProcessor):
     self.user_service = user_service
     self.avatar_processor = avatar_processor
 

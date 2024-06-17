@@ -2,9 +2,11 @@ tailwind.config = {
   theme: {
     extend: {
       colors: {
-        foreground: '#02030',
-        background: '#f3f5f9',
-      }
-    }
-  }
-}
+        'main-foreground': '#020301',
+        'main-background': '#f3f5f9',
+      },
+    },
+  },
+  variants: {},
+  plugins: [],
+};

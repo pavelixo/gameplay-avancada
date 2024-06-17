@@ -22,7 +22,7 @@ class User(TypedDict):
   banner_color: Optional[str]
   clan: Optional[str]
 
-class TextChannel(TypedDict):
+class Channel(TypedDict):
   id: str
   guild_id: str
   name: str
