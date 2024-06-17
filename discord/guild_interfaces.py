@@ -18,7 +18,7 @@ class IChannelProcessor(ABC):
 
 class IMessageService(ABC):
   @abstractmethod
-  def get_messages(self, channel_id: ID) -> List[Message]:
+  def get_messages(self, channel_id: ID, limit: int = 10) -> List[Message]:
     pass
 
 class IMessageProcessor(ABC):

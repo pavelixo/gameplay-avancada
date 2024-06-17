@@ -60,9 +60,9 @@ class MessageService(IMessageService):
   def __init__(self, config: DiscordConfig):
     self.config = config
   
-  def get_messages(self, channel_id: ID) -> List[Message]:
+  def get_messages(self, channel_id: ID, limit: int = 10) -> List[Message]:
     endpoint = f'{self.config.CHANNELS}/{channel_id}/messages'
-    params = {'limit': 15}
+    params = {'limit': limit}
     messages_data = fetch_data(endpoint=endpoint, params=params)
     return messages_data
 
@@ -107,5 +107,5 @@ class GuildService:
   
   def get_announcements(self) -> List[Message]:
     announcements_channel_id: ID = settings.ANNOUNCEMENTS_CHANNEL_ID
-    messages = self.message_service.get_messages(channel_id=announcements_channel_id)
+    messages = self.message_service.get_messages(channel_id=announcements_channel_id, limit=13)
     return self.message_processor.process_messages(messages)
