@@ -6,7 +6,7 @@
 <div class="mt-12 space-x-2">
   {% for announcement in announcements %}
   <!-- user info -->
-  <div class="space-x-2 rounded-lg p-4">
+  <div class="rounded-lg p-4">
     {% if announcement.message_reference %}
     <!-- replie -->
     <div class="py-2 left-4 top-0">
@@ -40,7 +40,7 @@
       </div>
     </div>
     <!-- user info -->
-    <div class="{% if announcement.message_reference %}translate-x-16{% else %}translate-x-14{% endif %}">
+    <div class="translate-x-16">
       {% if announcement.mentions %}
       <p>{{ announcement.content|mention:announcement.mentions }}</p>
       {% elif announcement.content|is_single_url %}
