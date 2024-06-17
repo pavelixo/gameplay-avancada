@@ -74,22 +74,23 @@ class MessageProcessor(IMessageProcessor):
       processed_messages = []
 
       for message in messages:
-        if 'referenced_message' in message and 'author' in message['referenced_message']:
-          processed_message = {
-            **message,
-            'referenced_message': {
-              **message['referenced_message'],
-              'author': {
-                **message['referenced_message']['author'],
-                'avatar': f"{self.config.DISCORD_IMAGE_BASE}/avatars/{message['referenced_message']['author']['id']}/{message['referenced_message']['author']['avatar']}"
+          if 'referenced_message' in message and message['referenced_message'] is not None and 'author' in message['referenced_message']:
+              processed_message = {
+                  **message,
+                  'referenced_message': {
+                      **message['referenced_message'],
+                      'author': {
+                          **message['referenced_message']['author'],
+                          'avatar': f"{self.config.DISCORD_IMAGE_BASE}/avatars/{message['referenced_message']['author']['id']}/{message['referenced_message']['author']['avatar']}"
+                      }
+                  }
               }
-            }
-          }
-        else:
-          processed_message = message
-        processed_messages.append(processed_message)
+          else:
+              processed_message = message
+          processed_messages.append(processed_message)
 
       return processed_messages
+
 
 
 

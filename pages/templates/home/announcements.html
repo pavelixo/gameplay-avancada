@@ -12,14 +12,18 @@
     <div class="py-2 left-4 top-0">
       <div class="inline-block space-x-2 space-y-1 rounded px-2 py-0.5 mb-2">
         <div class="flex items-center space-x-2">
+          {% if announcement.referenced_message.author.avatar %}
           <img src="{{ announcement.referenced_message.author.avatar }}"
             alt="{{ announcement.referenced_message.author.username }}" class="rounded-full w-5 h-5">
           <p class="text-xs font-semibold">{{ announcement.referenced_message.author.username }}</p>
+          {% endif %}
           {% if not announcement.referenced_message.content|is_single_url %}
           <p class="text-xs truncate">{{ announcement.referenced_message.content|mention:announcement.referenced_message.mentions|validate_content_length }}</p>
-          {% else %}
+          {% elif announcement.referenced_message.content %}
           <a href="{{ announcement.referenced_message.content }}"
-            class="text-xs text-blue-500 hover:text-blue-700 underline truncate">...</a>
+          class="text-xs text-blue-500 hover:text-blue-700 underline truncate">...</a>
+          {% else %}
+          <p class="text-xs truncate">A mensagem original foi excluída</p>
           {% endif %}
         </div>
       </div>
