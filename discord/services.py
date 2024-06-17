@@ -1,26 +1,25 @@
 from requests import get, Response
-from typing import Dict, List, Union
-from .interface import IUserService, IAvatarProcessor
-from .config import DiscordConfig
-from .types import User
+from typing import List, Union
 
+from .interface import IUserService, IAvatarProcessor, IGuildService
+from .config import DiscordConfig
+from .types import User, TextChannel
+from .utils import fetch_data
 
 class DiscordUserService(IUserService):
-  def __init__(self, config: DiscordConfig, headers: Dict[str, str]) -> None:
+  def __init__(self, config: DiscordConfig) -> None:
     self.config = config
-    self.headers = headers
   
   def get_users(self) -> Union[List[User], None]:
-    response: Response = get(
-      url=self.config.GUILD_MEMBERS, 
-      params={'limit': self.config.guild_members_count}, 
-      headers=self.headers
-    )
+    endpoint = self.config.GUILD_MEMBERS
+    params = {
+      'limit': self.config.guild_members_count
+    }
 
-    if response.status_code == 200:
-      data =  response.json()
-      return [user['user'] for user in data]
-    return None
+    users_data: Response = fetch_data(endpoint=endpoint, params=params)
+    if not users_data:
+      return None
+    return [user['user'] for user in users_data]
 
 
 class AvatarProcecssor(IAvatarProcessor):
@@ -32,6 +31,20 @@ class AvatarProcecssor(IAvatarProcessor):
       {**user, 'avatar': f'{self.config.DISCORD_IMAGE_BASE}/avatars/{user["id"]}/{user["avatar"]}'}
       for user in users
     ]
+
+
+class GuildService(IGuildService):
+  def __init__(self, config: DiscordConfig):
+    self.config = config
+  
+  def get_channels(self) -> List[TextChannel]:
+    endpoint = self.config.GUILD_CHANNELS
+    params = {'nfsw': False}
+
+    channels_data: Response = fetch_data(endpoint=endpoint, params=params)
+    if not channels_data:
+      return None
+    return channels_data
 
 
 class MemberService:

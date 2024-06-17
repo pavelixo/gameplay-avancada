@@ -12,8 +12,7 @@ class DiscordView(View, ContextMixin):
   template_name = ''
 
   config = DiscordConfig
-  headers = settings.DISCORD_AUTH
-  user_service: IUserService = DiscordUserService(config, headers)
+  user_service: IUserService = DiscordUserService(config)
   avatar_processor: IAvatarProcessor = AvatarProcecssor(config)
   member_service: MemberService = MemberService(user_service, avatar_processor)
 

@@ -1,14 +1,14 @@
 from requests import get
 from django.conf import settings
 from typing import Union, Type
-from .types import Data
+from .types import Data, Endpoint
 
 
-def fetch_data(endpoint: str) -> Union[Data, None]:
+def fetch_data(endpoint: Endpoint, status_code=200, **kwargs) -> Union[Data, None]:
   headers = settings.DISCORD_AUTH
 
-  response = get(url=endpoint, headers=headers)
-  if response.status_code == 200:
+  response = get(url=endpoint, headers=headers, **kwargs)
+  if response.status_code == status_code:
     return response.json()
   else:
     return None
