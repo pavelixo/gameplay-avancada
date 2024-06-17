@@ -3,20 +3,20 @@
 
 <h1 class="text-3xl font-bold text-center">Anúncios</h1>
 
-<div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<div class="mt-12 space-x-2">
   {% for announcement in announcements %}
   <!-- user info -->
   <div class="space-x-2 rounded-lg p-4">
     {% if announcement.message_reference %}
     <!-- replie -->
-    <div class="py-2">
+    <div class="py-2 left-4 top-0">
       <div class="inline-block space-x-2 space-y-1 rounded px-2 py-0.5 mb-2">
         <div class="flex items-center space-x-2">
           <img src="{{ announcement.referenced_message.author.avatar }}"
             alt="{{ announcement.referenced_message.author.username }}" class="rounded-full w-5 h-5">
           <p class="text-xs font-semibold">{{ announcement.referenced_message.author.username }}</p>
           {% if not announcement.referenced_message.content|is_single_url %}
-          <p class="text-xs truncate">{{ announcement.referenced_message.content|validate_content_length }}</p>
+          <p class="text-xs truncate">{{ announcement.referenced_message.content|mention:announcement.referenced_message.mentions|validate_content_length }}</p>
           {% else %}
           <a href="{{ announcement.referenced_message.content }}"
             class="text-xs text-blue-500 hover:text-blue-700 underline truncate">...</a>
@@ -36,7 +36,7 @@
       </div>
     </div>
     <!-- user info -->
-    <div>
+    <div class="{% if announcement.message_reference %}translate-x-16{% else %}translate-x-14{% endif %}">
       {% if announcement.mentions %}
       <p>{{ announcement.content|mention:announcement.mentions }}</p>
       {% elif announcement.content|is_single_url %}
