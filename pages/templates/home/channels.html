@@ -1,9 +1,9 @@
 <h1 class="text-3xl font-bold text-left translate-x-2">Canais</h1>
 
-<div class="mt-2 mb-12 w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+<div class="p-4 mt-2 mb-12 w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
   {% for text_channel in text_channels %}
     {% if not text_channel.nsfw %}
-      <div class="p-4 rounded-lg hover:bg-main-background hover:shadow-md transition duration-300 ease-in-out transform hover:scale-105 group">
+      <div class="p-2 rounded-lg hover:bg-main-background hover:shadow-md transition duration-300 ease-in-out transform hover:scale-105 group">
         <h2 class="text-center text-lg font-semibold text-main-background group-hover:text-main-foreground">{{ text_channel.name }}</h2>
       </div>    
     {% endif %}
