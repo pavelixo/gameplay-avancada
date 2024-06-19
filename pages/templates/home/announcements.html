@@ -54,11 +54,11 @@
         {% for attachment in announcement.attachments %}
         <div class="relative group">
           {% if attachment.url|is_video_url %}
-          <video controls class="rounded-lg shadow-md w-full h-auto">
+          <video controls class="rounded-sm w-2/2 h-auto">
             <source src="{{ attachment.url }}" type="video/mp4">
           </video>
           {% elif attachment.url|is_image_url %}
-          <img src="{{ attachment.url }}" alt="Attachment" class="rounded-lg shadow-md w-1/2 h-auto">
+          <img src="{{ attachment.url }}" alt="Attachment" class="rounded-sm w-2/2 h-auto">
           {% else %}
           <a href="{{ attachment.url }}"
             class="text-blue-500 hover:underline block rounded-lg shadow-md p-4 text-center bg-gray-100">
