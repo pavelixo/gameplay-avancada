@@ -9,7 +9,7 @@
   <div class="rounded-lg p-4 overflow-hidden">
     {% if announcement.message_reference %}
     <!-- replie -->
-    <div class="py-2 left-4 top-0">
+    <div class="py-2 left-4 top-0 select-none">
       <div class="inline-block space-x-2 space-y-1 rounded px-2 py-0.5 mb-2">
         <div class="flex items-center space-x-2">
           {% if announcement.referenced_message.author.avatar %}
@@ -33,7 +33,7 @@
     <div class="flex items-center">
       <div class="mr-4">
         <img src="{{ announcement.author.avatar }}" alt="{{ announcement.author.username }}"
-          class="rounded-full w-12 h-12">
+          class="rounded-full w-12 h-12 select-none">
       </div>
       <div>
         <p class="font-semibold">{{ announcement.author.username }}</p>
@@ -54,11 +54,11 @@
         {% for attachment in announcement.attachments %}
         <div class="relative group mt-1">
           {% if attachment.url|is_video_url %}
-          <video controls class="rounded-sm w-2/2 h-auto">
+          <video controls class="rounded-sm w-2/2 h-auto select-none">
             <source src="{{ attachment.url }}" type="video/mp4">
           </video>
           {% elif attachment.url|is_image_url %}
-          <img src="{{ attachment.url }}" alt="Attachment" class="rounded-sm w-2/2 h-auto">
+          <img src="{{ attachment.url }}" alt="Attachment" class="rounded-sm w-2/2 h-auto select-none">
           {% else %}
           <a href="{{ attachment.url }}"
             class="text-blue-500 hover:underline block rounded-lg shadow-md p-4 text-center bg-gray-100">

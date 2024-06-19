@@ -5,7 +5,7 @@
       {% if not user.bot %}
         <div class="swiper-slide rounded-lg flex flex-col items-center hover:scale-125 transition duration-300">
           <div class="w-20 h-20 mb-4 rounded-full overflow-hidden">
-            <img class="w-full h-full object-cover" src="{{ user.avatar }}" alt="{{ user.username }}">
+            <img class="w-full h-full object-cover select-none" src="{{ user.avatar }}" alt="{{ user.username }}">
           </div>
           <h3 class="username text-center">@{{ user.username }}</h3>
         </div>
