@@ -52,7 +52,7 @@
       {% if announcement.attachments %}
       <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {% for attachment in announcement.attachments %}
-        <div class="relative group">
+        <div class="relative group mt-1">
           {% if attachment.url|is_video_url %}
           <video controls class="rounded-sm w-2/2 h-auto">
             <source src="{{ attachment.url }}" type="video/mp4">
