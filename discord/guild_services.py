@@ -31,17 +31,13 @@ class ChannelService(IChannelService):
   def get_channels(self) -> List[Channel]:
     endpoint = self.config.GUILD_CHANNELS
     channels_data: Data = fetch_data(endpoint=endpoint)
-    if not channels_data:
-      return None
     return channels_data
   
-  def get_channel(self, id: ID) -> Channel:
-    endpoint = f'{self.config.GUILD_CHANNELS}/{id}'
+  def get_channel(self, channel_id: ID) -> Channel:
+    endpoint = f'{self.config.GUILD_CHANNELS}/{channel_id}'
     params = {'nfsw': False}
 
     channel_data: Data = fetch_data(endpoint=endpoint, params=params)
-    if not channel_data:
-      return None
     return channel_data
 
 
@@ -76,16 +72,19 @@ class MessageProcessor(IMessageProcessor):
 
       for message in messages:
           if 'referenced_message' in message and message['referenced_message'] is not None and 'author' in message['referenced_message']:
-              processed_message = {
-                  **message,
-                  'referenced_message': {
-                      **message['referenced_message'],
-                      'author': {
-                          **message['referenced_message']['author'],
-                          'avatar': f"{self.config.DISCORD_IMAGE_BASE}/avatars/{message['referenced_message']['author']['id']}/{message['referenced_message']['author']['avatar']}"
-                      }
-                  }
-              }
+              if message['referenced_message']['author']['avatar']:
+                processed_message = {
+                    **message,
+                    'referenced_message': {
+                        **message['referenced_message'],
+                        'author': {
+                            **message['referenced_message']['author'],
+                            'avatar': f"{self.config.DISCORD_IMAGE_BASE}/avatars/{message['referenced_message']['author']['id']}/{message['referenced_message']['author']['avatar']}"
+                        }
+                    }
+                }
+              else:
+                processed_message = message
           else:
               processed_message = message
           processed_messages.append(processed_message)
@@ -96,16 +95,32 @@ class MessageProcessor(IMessageProcessor):
 
 
   def process_users_avatars_messages(self, messages: List[Message]) -> List[Message]:
-    return [
-      {
-        **message, 
-        'author': {
-          **message['author'], 
-          'avatar': f'{self.config.DISCORD_IMAGE_BASE}/avatars/{message["author"]["id"]}/{message["author"]["avatar"]}'
+    processed_messages = []
+
+    for message in messages:
+      if message['author']['avatar'] is not None:
+        processed_message = {
+          **message,
+          'author': {
+            **message['author'],
+            'avatar': f'{self.config.DISCORD_IMAGE_BASE}/avatars/{message["author"]["id"]}/{message["author"]["avatar"]}'
+          }
         }
-      } 
-      for message in messages
-    ]
+      else:
+        processed_messages.append(message)
+      processed_messages.append(processed_message)
+    return processed_messages
+    # return [
+    #   {
+    #     **message, 
+    #     'author': {
+    #       **message['author'], 
+    #       'avatar': f'{self.config.DISCORD_IMAGE_BASE}/avatars/{message["author"]["id"]}/{message["author"]["avatar"]}'
+    #     }
+    #   } 
+    #   for message in messages
+    # ]
+    
     
 
 class GuildService:
@@ -128,6 +143,14 @@ class GuildService:
   def get_channels(self, channel_type: str = 'text') -> List[Channel]:
     channels = self.channel_service.get_channels()
     return self.channel_processor.process_channels(channels, channel_type)
+  
+  def get_channel_messages(self, channel_id: ID) -> Channel:
+    fetch_messages = self.message_service.get_messages(channel_id=channel_id, limit=10)
+
+    avatar_processor = self.message_processor.process_users_avatars_messages(fetch_messages)
+    replies_processor = self.message_processor.process_replies_messages(avatar_processor)
+
+    return replies_processor
   
   def get_announcements(self) -> List[Message]:
     announcements_channel_id: ID = settings.ANNOUNCEMENTS_CHANNEL_ID

@@ -8,7 +8,7 @@ class IChannelService(ABC):
     pass
 
   @abstractmethod
-  def get_channel(self, id: ID) -> Channel:
+  def get_channel(self, channel_id: ID) -> Channel:
     pass
 
 class IChannelProcessor(ABC):

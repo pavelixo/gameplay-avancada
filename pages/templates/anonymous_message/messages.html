@@ -1,0 +1,83 @@
+{% load validators %}
+{% load static %}
+{% load regex %}
+
+<div class="mb-12">
+  {% for message in channel_messages %}
+  <!-- user info -->
+  <div class="rounded-lg p-4 overflow-hidden">
+    {% if message.message_reference %}
+    <!-- replie -->
+    <div class="py-2 left-4 top-0 select-none">
+      <div class="inline-block space-x-2 space-y-1 rounded px-2 py-0.5 mb-2">
+        <div class="flex items-center space-x-2">
+          {% if message.referenced_message.author.avatar %}
+            <img src="{{ message.referenced_message.author.avatar }}"
+              alt="{{ message.referenced_message.author.username }}" class="rounded-full w-5 h-5">
+          {% else %}
+            <img src="{% static 'svg/user.svg' %}"
+            alt="{{ message.referenced_message.author.username }}" class="rounded-full w-5 h-5">
+          {% endif %}
+          <p class="text-xs font-semibold">{{ message.referenced_message.author.username }}</p>
+
+          {% if not message.referenced_message.content|is_single_url %}
+          <p class="text-xs truncate">{{ message.referenced_message.content|mention:message.referenced_message.mentions|validate_content_length }}</p>
+          {% elif message.referenced_message.content %}
+          <a href="{{ message.referenced_message.content }}"
+          class="text-xs text-blue-500 hover:text-blue-700 underline truncate">...</a>
+          {% else %}
+          <p class="text-xs truncate">A mensagem original foi excluída</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <!-- replie -->
+    {% endif %}
+    <div class="flex items-center">
+      <div class="mr-4">
+        {% if message.author.avatar %}
+          <img src="{{ message.author.avatar }}" alt="{{ message.author.username }}"
+            class="rounded-full w-12 h-12 select-none">
+        {% else %}
+          <img src="{% static 'svg/user.svg' %}" alt="{{ message.author.username }}"
+            class="rounded-full w-12 h-12 select-none">
+        {% endif %}
+      </div>
+      <div>
+        <p class="font-semibold">{{ message.author.username }}</p>
+      </div>
+    </div>
+    <!-- user info -->
+    <div class="translate-x-16 break-words w-4/5 ">
+      {% if message.mentions %}
+      <p>{{ message.content|mention:message.mentions }}</p>
+      {% elif message.content|is_single_url %}
+      <a href="{{ message.content }}" class="text-blue-500 hover:text-blue-700 underline">...</a>
+      {% else %}
+      <p>{{ message.content }}</p>
+      {% endif %}
+
+      {% if message.attachments %}
+      <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        {% for attachment in message.attachments %}
+        <div class="relative group mt-1">
+          {% if attachment.url|is_video_url %}
+          <video controls class="rounded-sm w-2/2 h-auto select-none">
+            <source src="{{ attachment.url }}" type="video/mp4">
+          </video>
+          {% elif attachment.url|is_image_url %}
+          <img src="{{ attachment.url }}" alt="Attachment" class="rounded-sm w-2/2 h-auto select-none">
+          {% else %}
+          <a href="{{ attachment.url }}"
+            class="text-blue-500 hover:underline block rounded-lg shadow-md p-4 text-center bg-gray-100">
+            View
+          </a>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>

@@ -1,4 +1,5 @@
 {% load validators %}
+{% load static %}
 {% load regex %}
 
 <h1 class="text-3xl font-bold text-left translate-x-2">Anúncios</h1>
@@ -13,17 +14,20 @@
       <div class="inline-block space-x-2 space-y-1 rounded px-2 py-0.5 mb-2">
         <div class="flex items-center space-x-2">
           {% if announcement.referenced_message.author.avatar %}
-          <img src="{{ announcement.referenced_message.author.avatar }}"
+            <img src="{{ announcement.referenced_message.author.avatar }}"
+              alt="{{ announcement.referenced_message.author.username }}" class="rounded-full w-5 h-5">
+          {% else %}
+            <img src="{% static 'svg/user.svg' %}"
             alt="{{ announcement.referenced_message.author.username }}" class="rounded-full w-5 h-5">
-          <p class="text-xs font-semibold">{{ announcement.referenced_message.author.username }}</p>
           {% endif %}
+            <p class="text-xs font-semibold">{{ announcement.referenced_message.author.username }}</p>
           {% if not announcement.referenced_message.content|is_single_url %}
-          <p class="text-xs truncate">{{ announcement.referenced_message.content|mention:announcement.referenced_message.mentions|validate_content_length }}</p>
+            <p class="text-xs truncate">{{ announcement.referenced_message.content|mention:announcement.referenced_message.mentions|validate_content_length }}</p>
           {% elif announcement.referenced_message.content %}
-          <a href="{{ announcement.referenced_message.content }}"
+            <a href="{{ announcement.referenced_message.content }}"
           class="text-xs text-blue-500 hover:text-blue-700 underline truncate">...</a>
           {% else %}
-          <p class="text-xs truncate">A mensagem original foi excluída</p>
+            <p class="text-xs truncate">A mensagem original foi excluída</p>
           {% endif %}
         </div>
       </div>
@@ -32,8 +36,13 @@
     {% endif %}
     <div class="flex items-center">
       <div class="mr-4">
-        <img src="{{ announcement.author.avatar }}" alt="{{ announcement.author.username }}"
-          class="rounded-full w-12 h-12 select-none">
+        {% if announcement.author.avatar %}
+          <img src="{{ announcement.author.avatar }}" alt="{{ announcement.author.username }}"
+            class="rounded-full w-12 h-12 select-none">
+        {% else %}
+          <img src="{% static 'svg/user.svg' %}" alt="{{ announcement.author.username }}"
+            class="rounded-full w-12 h-12 select-none">
+        {% endif %}
       </div>
       <div>
         <p class="font-semibold">{{ announcement.author.username }}</p>
@@ -42,32 +51,32 @@
     <!-- user info -->
     <div class="translate-x-16 break-words w-4/5 ">
       {% if announcement.mentions %}
-      <p>{{ announcement.content|mention:announcement.mentions }}</p>
+        <p>{{ announcement.content|mention:announcement.mentions }}</p>
       {% elif announcement.content|is_single_url %}
-      <a href="{{ announcement.content }}" class="text-blue-500 hover:text-blue-700 underline">...</a>
+        <a href="{{ announcement.content }}" class="text-blue-500 hover:text-blue-700 underline">...</a>
       {% else %}
-      <p>{{ announcement.content }}</p>
+        <p>{{ announcement.content }}</p>
       {% endif %}
 
       {% if announcement.attachments %}
-      <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {% for attachment in announcement.attachments %}
-        <div class="relative group mt-1">
-          {% if attachment.url|is_video_url %}
-          <video controls class="rounded-sm w-2/2 h-auto select-none">
-            <source src="{{ attachment.url }}" type="video/mp4">
-          </video>
-          {% elif attachment.url|is_image_url %}
-          <img src="{{ attachment.url }}" alt="Attachment" class="rounded-sm w-2/2 h-auto select-none">
-          {% else %}
-          <a href="{{ attachment.url }}"
-            class="text-blue-500 hover:underline block rounded-lg shadow-md p-4 text-center bg-gray-100">
-            View
-          </a>
-          {% endif %}
+        <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {% for attachment in announcement.attachments %}
+            <div class="relative group mt-1">
+              {% if attachment.url|is_video_url %}
+                <video controls class="rounded-sm w-2/2 h-auto select-none">
+                  <source src="{{ attachment.url }}" type="video/mp4">
+                </video>
+              {% elif attachment.url|is_image_url %}
+                <img src="{{ attachment.url }}" alt="Attachment" class="rounded-sm w-2/2 h-auto select-none">
+              {% else %}
+                <a href="{{ attachment.url }}"
+                  class="text-blue-500 hover:underline block rounded-lg shadow-md p-4 text-center bg-gray-100">
+                  View
+                </a>
+              {% endif %}
+            </div>
+          {% endfor %}
         </div>
-        {% endfor %}
-      </div>
       {% endif %}
     </div>
   </div>
