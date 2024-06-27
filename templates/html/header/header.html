@@ -1,9 +1,9 @@
 {% load static %}
 <header class="header flex justify-between items-center">
-  <div class="flex items-center space-x-2">
+  <a href="{% url 'home-view' %}" class="flex items-center space-x-2">
     <img class="w-auto min-w-5 max-w-10 h-auto min-h-5 max-h-10 rounded-full select-none" src="{{ meta.favicon }}">
     <h1 class="text-center font-bold">{{ meta.guild_name }}</h1>
-  </div>
+  </a>
   <div>
     <a href="https://github.com/pavelixo/gameplay-avancada" target="_blank" rel="noopener noreferrer">
       <img class="w-auto max-w-7 h-auto max-h-7 transition-transform duration-200 hover:scale-125" src="{% static 'svg/github-mark-white.svg' %}">
