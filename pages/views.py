@@ -15,7 +15,7 @@ class Home(DiscordView):
     context = {
       'users': self.member_service.get_members(),
       'text_channels': self.guild_service.get_channels(),
-      'announcements': self.guild_service.get_announcements()
+      # 'announcements': self.guild_service.get_announcements()
     }
     return self.render_template(request, context)
 
