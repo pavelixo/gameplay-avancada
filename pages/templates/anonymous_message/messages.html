@@ -46,12 +46,12 @@
             class="rounded-full w-12 h-12 select-none">
         {% endif %}
       </div>
-      <div>
+      <div class="transform -translate-y-4">
         <p class="font-semibold">{{ message.author.username }}</p>
       </div>
     </div>
     <!-- user info -->
-    <div class="translate-x-16 break-words w-4/5 ">
+    <div class="translate-x-16 break-words w-4/5 transform -translate-y-7 ">
       {% if message.mentions %}
       <p>{{ message.content|mention:message.mentions }}</p>
       {% elif message.content|is_single_url %}
