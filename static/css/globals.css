@@ -38,6 +38,7 @@
 
 body, html {
   background-color: var(--foreground-color);
+  color: var(--background-color);
   overflow-x: hidden;
   height: 100vh;
 }
