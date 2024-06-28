@@ -30,7 +30,7 @@ class ChannelService(IChannelService):
   
   def get_channels(self) -> List[Channel]:
     endpoint = self.config.GUILD_CHANNELS
-    channels_data: Data = fetch_data(endpoint=endpoint)
+    channels_data: Data = fetch_data(endpoint=endpoint, params={'nfsw': False})
     return channels_data
   
   def get_channel(self, channel_id: ID) -> Channel:

@@ -34,6 +34,8 @@ class AnonymousMessage(DiscordView):
         'channel': self.guild_service.get_channel(channel_id),
         'channel_messages': self.guild_service.get_channel_messages(channel_id)
       }
+      if context['channel']['nsfw']:
+        return redirect('home-view')
       return self.render_template(request, context)
     except TypeError:
       return redirect('home-view')
