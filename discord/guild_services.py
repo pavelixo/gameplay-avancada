@@ -48,7 +48,7 @@ class ChannelProcessor(IChannelProcessor):
     target = matching.get(channel_type)
     if channels is not None:
       return [channel for channel in channels if channel['type'] == target]
-    return []
+    return None
 
 
 class MessageService(IMessageService):
@@ -89,9 +89,6 @@ class MessageProcessor(IMessageProcessor):
 
       return processed_messages
 
-
-
-
   def process_users_avatars_messages(self, messages: List[Message]) -> List[Message]:
     processed_messages = []
 
@@ -108,19 +105,8 @@ class MessageProcessor(IMessageProcessor):
         processed_messages.append(message)
       processed_messages.append(processed_message)
     return processed_messages
-    # return [
-    #   {
-    #     **message, 
-    #     'author': {
-    #       **message['author'], 
-    #       'avatar': f'{self.config.DISCORD_IMAGE_BASE}/avatars/{message["author"]["id"]}/{message["author"]["avatar"]}'
-    #     }
-    #   } 
-    #   for message in messages
-    # ]
     
     
-
 class GuildService:
   def __init__(
       self, 
@@ -148,16 +134,17 @@ class GuildService:
   def get_channel_messages(self, channel_id: ID) -> Channel:
     fetch_messages = self.message_service.get_messages(channel_id=channel_id, limit=10)
 
-    avatar_processor = self.message_processor.process_users_avatars_messages(fetch_messages)
-    replies_processor = self.message_processor.process_replies_messages(avatar_processor)
-
-    return replies_processor
+    if fetch_messages:
+      avatar_processor = self.message_processor.process_users_avatars_messages(fetch_messages)
+      messages = self.message_processor.process_replies_messages(avatar_processor)
+      return messages
+    return None
   
   def get_announcements(self) -> List[Message]:
     announcements_channel_id: ID = settings.ANNOUNCEMENTS_CHANNEL_ID
     fetch_messages = self.message_service.get_messages(channel_id=announcements_channel_id, limit=5)
     
     avatar_processor = self.message_processor.process_users_avatars_messages(fetch_messages)
-    replies_processor = self.message_processor.process_replies_messages(avatar_processor)
+    messages = self.message_processor.process_replies_messages(avatar_processor)
     
-    return replies_processor
+    return messages
