@@ -2,8 +2,7 @@
 
 {% load static %}
 {% block head %}
-<link rel="stylesheet" href="{% static 'vendor/swiper/css/swiper-bundle.min.css' %}" />
-<link rel="stylesheet" href="{% static 'home/css/text.css' %}" />
+<script src="{% static 'vendor/marked/marked.min.js' %}"></script>
 {% endblock %}
 
 {% block body %}
@@ -11,6 +10,12 @@
   {% include 'anonymous_message/messages.html' %}
 </div>
 
-<script src="{% static 'vendor/swiper/js/swiper-bundle.min.js' %}"></script>
-<script src="{% static 'home/js/users-swipe.js' %}"></script>
+<script>
+  const markdownSpans = document.getElementsByClassName('markdown-span');
+
+  for (let span of markdownSpans) {
+    span.innerHTML = marked.parse(span.textContent);
+  }
+</script>
+<script src="{% static 'anonymous_message/js/markdown.js' %}"></script>
 {% endblock %}

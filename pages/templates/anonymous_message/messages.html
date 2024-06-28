@@ -57,7 +57,7 @@
       {% elif message.content|is_single_url %}
       <a href="{{ message.content }}" class="text-blue-500 hover:text-blue-700 underline">...</a>
       {% else %}
-      <p>{{ message.content }}</p>
+      <span class="markdown-span">{{ message.content }}</span>
       {% endif %}
 
       {% if message.attachments %}
