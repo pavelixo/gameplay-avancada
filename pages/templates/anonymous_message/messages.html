@@ -10,9 +10,10 @@
   <div class="rounded-lg p-4 overflow-hidden">
     {% if message.message_reference %}
     <!-- replie -->
-    <div class="py-2 left-4 top-0 select-none">
+    <div class="translate-x-3 py-2 left-4 top-0 select-none">
       <div class="inline-block space-x-2 space-y-1 rounded px-2 py-0.5 mb-2">
         <div class="flex items-center space-x-2">
+          <p class="text-xs">╭───</p>
           {% if message.referenced_message.author.avatar %}
             <img src="{{ message.referenced_message.author.avatar }}"
               alt="{{ message.referenced_message.author.username }}" class="rounded-full w-5 h-5">
