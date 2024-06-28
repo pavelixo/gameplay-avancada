@@ -34,10 +34,8 @@ class ChannelService(IChannelService):
     return channels_data
   
   def get_channel(self, channel_id: ID) -> Channel:
-    endpoint = f'{self.config.GUILD_CHANNELS}/{channel_id}'
-    params = {'nfsw': False}
-
-    channel_data: Data = fetch_data(endpoint=endpoint, params=params)
+    endpoint = f'{self.config.CHANNELS}/{channel_id}'
+    channel_data: Data = fetch_data(endpoint=endpoint)
     return channel_data
 
 
@@ -139,6 +137,9 @@ class GuildService:
     # Messages
     self.message_service = message_service
     self.message_processor = message_processor
+  
+  def get_channel(self, channel_id: ID) -> Channel:
+    return self.channel_service.get_channel(channel_id=channel_id)
   
   def get_channels(self, channel_type: str = 'text') -> List[Channel]:
     channels = self.channel_service.get_channels()

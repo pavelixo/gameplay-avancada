@@ -31,6 +31,7 @@ class AnonymousMessage(DiscordView):
 
     try:
       context = {
+        'channel': self.guild_service.get_channel(channel_id),
         'channel_messages': self.guild_service.get_channel_messages(channel_id)
       }
       return self.render_template(request, context)
