@@ -1,13 +1,14 @@
 @import url('/static/css/globals.css');
 
 .header {
-  background-color: var(--foreground-color);
   padding: 10px 20px;
   text-align: left;
   width: 100%;
   top: 0;
   z-index: 1000;
   position: fixed;
+  background-color: rgb(0, 0, 0);
+  box-shadow: 0px 0px 35px 35px rgb(0, 0, 0);
 }
 
 .header h1 {
