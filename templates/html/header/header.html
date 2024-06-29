@@ -1,12 +1,24 @@
 {% load static %}
 <header class="header flex justify-between items-center">
-  <a href="{% url 'home-view' %}" class="flex items-center space-x-2">
-    <img class="w-auto min-w-5 max-w-10 h-auto min-h-5 max-h-10 rounded-full select-none" src="{{ meta.favicon }}">
-    <h1 class="text-center font-bold">{{ meta.guild_name }}</h1>
-  </a>
-  <div>
-    <a href="https://github.com/pavelixo/gameplay-avancada" target="_blank" rel="noopener noreferrer">
-      <img class="github-logo w-auto max-w-7 h-auto max-h-7 transition-transform duration-200 hover:scale-125" src="{% static 'svg/github-mark-white.svg' %}">
-    </a>
-  </div>
+  {% if not channel %}
+    <div class="flex items-center space-x-2">
+      <img class="select-none w-auto min-w-5 max-w-10 h-auto min-h-5 max-h-10 rounded-full" src="{{ meta.favicon }}">
+      <h1 class="select-none text-center font-bold">{{ meta.guild_name }}</h1>
+    </div>
+    <div>
+      <a href="https://github.com/pavelixo/gameplay-avancada" target="_blank" rel="noopener noreferrer">
+        <img class="github-logo w-auto max-w-7 h-auto max-h-7 transition-transform duration-200 hover:scale-125" src="{% static 'svg/github-mark-white.svg' %}">
+      </a>
+    </div>
+  {% else %}
+    <div class="flex items-center space-x-2">
+      <a href="{% url 'home-view'%}" class="opacity-45 transition-transform duration-200 hover:scale-125 hover:opacity-100">
+        <img class="select-none w-auto min-w-10 max-w-10 h-auto min-h-10 max-h-10 rounded-full" src="{% static 'svg/arrow-left.svg' %}">
+      </a>
+      <span class="select-none">
+        <h4 class="font-bold text-nowrap truncate">{{ meta.guild_name }}</h4>
+        <p class="italic text-sm font-bold"># {{ channel.name }}</p>
+      </span>
+    </div>
+  {% endif %}
 </header>
