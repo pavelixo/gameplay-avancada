@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    # Externals
+    'channels',
+
     # Internals
     'discord',
     'pages',
@@ -81,7 +84,7 @@ TEMPLATES = [
         },
     },
 ]
-
+ASGI_APPLICATION = 'api.asgi.application'
 WSGI_APPLICATION = 'api.wsgi.app'
 
 
