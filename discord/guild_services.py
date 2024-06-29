@@ -1,11 +1,8 @@
 from typing import List
 
-from django.conf import settings
-from discord.types import ID, Data, Message
-
 from .guild_interfaces import IChannelService, IChannelProcessor, IMessageService, IMessageProcessor
 from .config import DiscordConfig
-from .types import Channel
+from .types import Channel, ID, Data, Message
 from .utils import fetch_data
 
 # Channels type
