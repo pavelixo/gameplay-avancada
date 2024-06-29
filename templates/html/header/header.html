@@ -12,8 +12,8 @@
     </div>
   {% else %}
     <div class="flex items-center space-x-2">
-      <a href="{% url 'home-view'%}" class="opacity-45 transition-transform duration-200 hover:scale-125 hover:opacity-100">
-        <img class="select-none w-auto min-w-10 max-w-10 h-auto min-h-10 max-h-10 rounded-full" src="{% static 'svg/arrow-left.svg' %}">
+      <a href="{% url 'home-view'%}" class="rounded transition-transform duration-200 hover:invert hover:bg-main-foreground ">
+        <img class="select-none w-auto min-w-10 max-w-10 h-auto min-h-10 max-h-10 hover:animate-pulse" src="{% static 'svg/arrow-left.svg' %}">
       </a>
       <span class="select-none">
         <h4 class="font-bold text-nowrap truncate">{{ meta.guild_name }}</h4>
