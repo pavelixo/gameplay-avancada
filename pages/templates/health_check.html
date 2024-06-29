@@ -10,7 +10,7 @@
 <script>
   const outputDiv = document.getElementById('output');
   const currentUrl = window.location.href;
-  const wsEndpoint = `ws://${currentUrl.split('/')[2]}/ws/health_check/`;
+  const wsEndpoint = `wss://${currentUrl.split('/')[2]}/ws/health_check/`;
 
   const socket = new WebSocket(wsEndpoint);
 
