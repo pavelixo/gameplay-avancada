@@ -2,13 +2,14 @@
   "version": 2,
   "builds": [
     {
+      "src": "api/wsgi.py",
+      "use": "@vercel/python",
+      "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
+    },
+    {
       "src": "api/asgi.py",
       "use": "@vercel/python",
-      "config": { 
-        "maxLambdaSize": "15mb", 
-        "runtime": "python3.9", 
-        "buildCommand": "daphne api.asgi:application "
-      }
+      "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
     },
     {
       "src": "build_files.sh",
@@ -24,8 +25,12 @@
       "dest": "/static/$1"
     },
     {
-      "src": "/(.*)",
+      "src": "/ws/(.*)",
       "dest": "api/asgi.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "api/wsgi.py"
     }
   ]
 }
