@@ -7,8 +7,9 @@
   top: 0;
   z-index: 1000;
   position: fixed;
-  background-color: rgb(0, 0, 0, 0.850);
+  background-color: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* Safari */
   box-shadow: 0px 0px 35px 35px rgb(0, 0, 0);
   border-bottom: 1px solid #e5e7eb36;
 }
