@@ -21,7 +21,7 @@
     },
     {
       "src": "/ws/(.*)",
-      "dest": "api/asgi.py"
+      "dest": "api/asgi"
     },
     {
       "src": "/(.*)",
