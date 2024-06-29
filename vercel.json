@@ -20,12 +20,8 @@
       "dest": "/static/$1"
     },
     {
-      "src": "/ws/(.*)",
-      "dest": "api/asgi"
-    },
-    {
       "src": "/(.*)",
-      "dest": "api/wsgi.py"
+      "dest": "api/asgi.py"
     }
   ]
 }
