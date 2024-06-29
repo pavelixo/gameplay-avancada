@@ -1,5 +1,5 @@
 from abc import ABC
-from typing import TypeVar, Generic, TypedDict, Optional, List, Union
+from typing import TypeVar, Generic, TypedDict, Optional, List, Union, Dict
 
 T = TypeVar('T')
 
@@ -10,42 +10,66 @@ class AbstractTypes(ABC, Generic[T]):
 
 
 class User(TypedDict):
-    id: str  # snowflake: The user's ID
-    username: str  # string: The user's username
-    avatar: Optional[str]  # avatar hash of the user
-    discriminator: str  # the user's 4-digit discord-tag
-    public_flags: Optional[int]  # the flags on a user's account
-    flags: Optional[int]  # the flags on a user's account
-    banner: Optional[str]  # the user's banner hash
-    accent_color: Optional[int]  # the user's chosen accent color
-    global_name: Optional[str]  # the user's linked account's global username
-    avatar_decoration_data: Optional[str]  # the type of nitro badge on this user's avatar
-    banner_color: Optional[str]  # the user's banner color if they have one
-    clan: Optional[str]  # the user's connected guild membership info
+    id: str
+    username: str
+    avatar: Optional[str] 
+    discriminator: str 
+    public_flags: Optional[int]
+    flags: Optional[int]
+    banner: Optional[str]
+    accent_color: Optional[int]
+    global_name: Optional[str]
+    avatar_decoration_data: Optional[str]
+    banner_color: Optional[str]
+    clan: Optional[str]
 
 
 class RoleTags(TypedDict, total=False):
-    bot_id: Optional[str]  # snowflake: the id of the bot this role belongs to
-    integration_id: Optional[str]  # snowflake: the id of the integration this role belongs to
-    premium_subscriber: Optional[None]  # null: whether this is the guild's Booster role
-    subscription_listing_id: Optional[str]  # snowflake: the id of this role's subscription sku and listing
-    available_for_purchase: Optional[None]  # null: whether this role is available for purchase
-    guild_connections: Optional[None]  # null: whether this role is a guild's linked role
+    bot_id: Optional[str]
+    integration_id: Optional[str]
+    premium_subscriber: Optional[None]
+    subscription_listing_id: Optional[str]
+    available_for_purchase: Optional[None] 
+    guild_connections: Optional[None]
 
 
 class Role(TypedDict):
-    id: str  # snowflake: role id
-    name: str  # string: role name
-    color: int  # integer: integer representation of hexadecimal color code
-    hoist: bool  # boolean: if this role is pinned in the user listing
-    icon: Optional[str]  # ?string: role icon hash
-    unicode_emoji: Optional[str]  # ?string: role unicode emoji
-    position: int  # integer: position of this role (roles with the same position are sorted by id)
-    permissions: str  # string: permission bit set
-    managed: bool  # boolean: whether this role is managed by an integration
-    mentionable: bool  # boolean: whether this role is mentionable
-    tags: Optional[RoleTags]  # ?role tags object: the tags this role has
-    flags: int  # integer: role flags combined as a bitfield
+    id: str
+    name: str
+    color: int
+    hoist: bool
+    icon: Optional[str]
+    unicode_emoji: Optional[str]
+    position: int
+    permissions: str
+    managed: bool
+    mentionable: bool
+    tags: Optional[RoleTags]
+    flags: int
+
+
+class Channel(TypedDict):
+    pass
+
+
+class PartialChannel(TypedDict, total=False):
+    id: str 
+    name: str
+    type: int
+
+
+class GuildMember(TypedDict, total=False):
+    user: User
+    nick: Optional[str]
+    roles: List[str]
+    joined_at: str
+    premium_since: Optional[str]
+    deaf: bool
+    mute: bool
+    pending: Optional[bool]
+    permissions: str
+    communication_disabled_until: Optional[str]
+    # add other fields as needed
 
 
 class ChannelMention(TypedDict):
