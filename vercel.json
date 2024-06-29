@@ -22,10 +22,6 @@
     {
       "src": "/ws/(.*)",
       "dest": "api/asgi.py"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "api/wsgi.py"
     }
   ]
 }
