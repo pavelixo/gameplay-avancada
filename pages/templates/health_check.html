@@ -1,0 +1,41 @@
+{% extends 'html/base.html' %}
+
+{% load static %}
+{% block head %}
+{% endblock %}
+
+{% block body %}
+
+<div id="output"></div>
+<script>
+  const outputDiv = document.getElementById('output');
+  const currentUrl = window.location.href;
+  const wsEndpoint = `ws://${currentUrl.split('/')[2]}/ws/health_check/`;
+
+  const socket = new WebSocket(wsEndpoint);
+
+  socket.onopen = function() {
+      logMessage('WebSocket opened');
+      // Exemplo: Enviar mensagem para o servidor
+      socket.send('Hello from client!');
+  };
+
+  socket.onmessage = function(event) {
+      logMessage('Message from server: ' + event.data);
+  };
+
+  socket.onclose = function(event) {
+      logMessage('WebSocket closed with code: ' + event.code);
+  };
+
+  socket.onerror = function(error) {
+      logMessage('WebSocket error: ' + error.message);
+  };
+
+  function logMessage(message) {
+      const p = document.createElement('p');
+      p.textContent = message;
+      outputDiv.appendChild(p);
+  }
+</script>
+{% endblock %}

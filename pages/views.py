@@ -41,4 +41,9 @@ class AnonymousMessage(DiscordView):
     return self.render_template(
       request, { 'channel': channel, 'channel_messages': reversed(channel_messages) }
     )
-  
+
+class HealthCheck(DiscordView):
+  template_name = 'health_check.html'
+
+  def get(self, request):
+    return self.render_template(request, {})
