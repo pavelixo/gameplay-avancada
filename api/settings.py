@@ -33,7 +33,6 @@ DISCORD_IMAGE_BASE = 'https://cdn.discordapp.com'
 
 # DISCORD: Global IDs
 GUILD_ID = '1217879394941534330'
-ANNOUNCEMENTS_CHANNEL_ID = '1217891131006648421' #announcements
 
 # META:
 SITE_NAME = 'Gameplay Avançada'

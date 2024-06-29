@@ -139,12 +139,3 @@ class GuildService:
       messages = self.message_processor.process_replies_messages(avatar_processor)
       return messages
     return None
-  
-  def get_announcements(self) -> List[Message]:
-    announcements_channel_id: ID = settings.ANNOUNCEMENTS_CHANNEL_ID
-    fetch_messages = self.message_service.get_messages(channel_id=announcements_channel_id, limit=5)
-    
-    avatar_processor = self.message_processor.process_users_avatars_messages(fetch_messages)
-    messages = self.message_processor.process_replies_messages(avatar_processor)
-    
-    return messages
