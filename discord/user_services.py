@@ -29,7 +29,10 @@ class AvatarProcessor(IAvatarProcessor):
   
   def process_avatar(self, users: List[User]) -> List[User]:
     return [
-      {**user, 'avatar': f'{self.config.DISCORD_IMAGE_BASE}/avatars/{user["id"]}/{user["avatar"]}'}
+      {
+        **user, 
+        'avatar': f'{self.config.DISCORD_IMAGE_BASE}/avatars/{user["id"]}/{user["avatar"]}' if user['avatar'] else None
+      }
       for user in users
     ]
 

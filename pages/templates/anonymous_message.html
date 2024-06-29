@@ -9,13 +9,5 @@
 <div class="mx-auto mt-20">
   {% include 'anonymous_message/messages.html' %}
 </div>
-
-<script>
-  const markdownSpans = document.getElementsByClassName('markdown-span');
-
-  for (let span of markdownSpans) {
-    span.innerHTML = marked.parse(span.textContent);
-  }
-</script>
 <script src="{% static 'anonymous_message/js/markdown.js' %}"></script>
 {% endblock %}

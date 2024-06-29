@@ -1,3 +1,4 @@
+{% load static %}
 <h1 class="text-3xl font-bold text-left translate-x-2">Membros</h1>
 <div class="swiper-container mt-4 mb-12">
   <div class="swiper-wrapper">
@@ -5,7 +6,11 @@
       {% if not user.bot %}
         <div class="swiper-slide rounded-lg flex flex-col items-center hover:scale-125 transition duration-300">
           <div class="w-20 h-20 mb-4 rounded-full overflow-hidden">
-            <img class="w-full h-full object-cover select-none" src="{{ user.avatar }}" alt="{{ user.username }}">
+            {% if user.avatar %}
+              <img class="w-full h-full object-cover select-none" src="{{ user.avatar }}" alt="{{ user.username }}">
+            {% else %}
+              <img class="w-full h-full object-cover select-none" src="{% static 'svg/user.svg' %}" alt="{{ user.username }}">
+            {% endif %}
           </div>
           <h3 class="username text-center">@{{ user.username }}</h3>
         </div>
