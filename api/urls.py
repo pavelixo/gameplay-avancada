@@ -10,14 +10,12 @@ from django.conf.urls.static import static
 from pages.views import (
   Home,
   AnonymousMessage,
-  HealthCheck
 )
 
 
 urlpatterns = [
   path('home/', Home.as_view(), name='home-view'),
   path('channel/<str:channel_id>', AnonymousMessage.as_view(), name='anonymous-message-view'),
-  path('health/', HealthCheck.as_view(), name='health-check')
 ]
 
 urlpatterns += [path('', lambda request: redirect('home-view'))]
