@@ -29,6 +29,6 @@ class DiscordConfig:
   OWNER_GLOBAL_NAME: Data = OWNER_DATA['global_name']
 
   GUILD_NAME = GUILD_DATA['name']
-  GUILD_FAVICON = f"{DISCORD_IMAGE_BASE}/icons/{GUILD_ID}/{GUILD_DATA['icon']}.png"
+  GUILD_FAVICON = f"{DISCORD_IMAGE_BASE}/icons/{GUILD_ID}/{GUILD_DATA['icon']}"
 
   guild_members_count: int = parser(GUILD_MEMBERS_COUNT, int)
