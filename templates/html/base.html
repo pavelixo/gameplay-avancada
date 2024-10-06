@@ -1,4 +1,5 @@
 {% load static %}
+{% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,9 +18,9 @@
       property="og:description"
       content="{% block description %}{{ meta.description }}{% endblock %}"
     />
+
     <!-- meta -->
-    <script src="{% static 'vendor/tailwind/tailwind.3.4.4' %}"></script>
-    <script src="{% static 'tailwind/tailwind.config.js' %}"></script>
+    {% tailwind_css %}
     <script src="{% static 'vendor/htmx/htmx.min.js' %}"></script>
 
     <link rel="stylesheet" href="{% static 'css/globals.css' %}">
