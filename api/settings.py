@@ -50,6 +50,9 @@ INSTALLED_APPS = [
     # Internals
     'discord',
     'pages',
+
+    # externals
+    'tailwind',
 ]
 
 MIDDLEWARE = [
