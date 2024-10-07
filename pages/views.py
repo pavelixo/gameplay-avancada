@@ -1,11 +1,10 @@
-from django.http import HttpResponse
-from django.shortcuts import redirect
-
 from discord.views import DiscordView
+
+from django.shortcuts import redirect
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
 from django.utils.decorators import method_decorator
-
+from django.conf import settings
 
 class Home(DiscordView):
   template_name = 'home.html'
@@ -16,8 +15,9 @@ class Home(DiscordView):
   def get(self, request):
     users = self.member_service.get_members()
     text_channels = self.guild_service.get_channels()
+    announcements = self.guild_service.get_channel_messages(settings.ANNOUNCEMENTS_ID, limit=1)
     return self.render_template(
-      request, { 'users': users, 'text_channels': text_channels }
+      request, { 'users': users, 'announcements': announcements,'text_channels': text_channels }
     )
 
 

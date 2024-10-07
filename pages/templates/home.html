@@ -8,10 +8,12 @@
 
 {% block body %}
 <div class="mx-auto mt-20">
+  {% include 'home/announcements.html' %}
   {% include 'home/users.html' %}
   {% include 'home/channels.html' %}
 </div>
 
+<script src="{% static 'anonymous_message/js/markdown.js' %}"></script>
 <script src="{% static 'vendor/swiper/js/swiper-bundle.min.js' %}"></script>
 <script src="{% static 'home/js/users-swipe.js' %}"></script>
 {% endblock %}
