@@ -128,8 +128,8 @@ class GuildService:
     channels = self.channel_service.get_channels()
     return self.channel_processor.process_channels(channels, channel_type)
   
-  def get_channel_messages(self, channel_id: ID) -> Channel:
-    fetch_messages = self.message_service.get_messages(channel_id=channel_id, limit=10)
+  def get_channel_messages(self, channel_id: ID, limit: int = 10) -> Channel:
+    fetch_messages = self.message_service.get_messages(channel_id=channel_id, limit=limit)
 
     if fetch_messages:
       avatar_processor = self.message_processor.process_users_avatars_messages(fetch_messages)

@@ -12,8 +12,8 @@
     <meta name="og:type" content="website">
     <meta charset="utf-8">
     <meta name="theme-color" content="#0e1111">
-    <meta name="og:title" content="{{ meta.guild_name }}">
-    <meta name="og:site_name" content="{{ meta.site_name}}">
+    <meta name="og:title" content="{% block meta_title %}{{ meta.guild_name }}{% endblock %}">
+    <meta name="og:site_name" content="{% block meta_site_name %}{{ meta.site_name }}{% endblock %}">
     <meta
       property="og:description"
       content="{% block description %}{{ meta.description }}{% endblock %}"

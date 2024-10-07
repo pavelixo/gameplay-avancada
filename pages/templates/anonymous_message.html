@@ -1,6 +1,19 @@
 {% extends 'html/base.html' %}
 
 {% load static %}
+
+{% block title %}
+{{ channel.name }}
+{% endblock %}
+
+{% block meta_title %}
+{{ channel.name }}
+{% endblock %}
+
+{% block description %}
+Gozando fatos em {{ channel.name }}
+{% endblock %}
+
 {% block head %}
 <script src="{% static 'vendor/marked/marked.min.js' %}"></script>
 {% endblock %}
