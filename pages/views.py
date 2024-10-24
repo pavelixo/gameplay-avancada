@@ -29,7 +29,7 @@ class AnonymousMessage(DiscordView):
   @method_decorator(vary_on_cookie)
   def get(self, request, channel_id):    
     channel = self.guild_service.get_channel(channel_id)
-    channel_messages = self.guild_service.get_channel_messages(channel_id)
+    channel_messages = self.guild_service.get_channel_messages(channel_id, limit=64)
 
     if not channel and not channel_messages:
       return redirect('home-view')
