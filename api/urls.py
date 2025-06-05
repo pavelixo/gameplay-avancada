@@ -12,8 +12,7 @@ from pages.views import (
   AnonymousMessage,
 )
 
-urlpatterns = []
-# urlpatterns = [
+urlpatterns = [
   path('home/', Home.as_view(), name='home-view'),
   path('channel/<str:channel_id>', AnonymousMessage.as_view(), name='anonymous-message-view'),
 ]
