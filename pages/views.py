@@ -14,7 +14,10 @@ class Home(DiscordView):
   @method_decorator(vary_on_cookie)
   def get(self, request):
     users = self.member_service.get_members()
-    text_channels = self.guild_service.get_channels()
+    text_channels = [
+        channel for channel in self.guild_service.get_channels()
+        if channel["id"] not in settings.BLACKLIST
+    ]
     announcements = self.guild_service.get_channel_messages(settings.ANNOUNCEMENTS_ID, limit=1)
     return self.render_template(
       request, { 'users': users, 'announcements': announcements,'text_channels': text_channels }

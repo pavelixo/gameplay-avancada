@@ -39,6 +39,14 @@ ANNOUNCEMENTS_ID = '1217891131006648421'
 SITE_NAME = 'Gameplay Avançada'
 DESCRIPTION = 'A melhor comunidade do discord! xxd:'
 
+# Blacklist
+BLACKLIST = [
+    '1232492392859566080',
+    '1217893616198881321',
+    '1217887732806717561',
+    '1217887779514486784'
+]
+
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
